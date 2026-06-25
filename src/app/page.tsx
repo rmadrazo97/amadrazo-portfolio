@@ -1758,7 +1758,7 @@ export default function Home() {
               <div
                 key={sk.cat}
                 style={{
-                  gridColumn: sk.span,
+                  gridColumn: isMobile ? "auto" : sk.span,
                   background: "#FCFBF6",
                   border: "1px solid #D7D0C2",
                   borderRadius: 14,
