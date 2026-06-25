@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import GlitchMark from "../components/GlitchMark";
+import { posts, formatDate } from "../posts/meta";
 
 const MONO = "'JetBrains Mono', monospace";
 const GROTESK = "'Space Grotesk', sans-serif";
@@ -647,6 +648,9 @@ export default function Home() {
             </a>
             <a href="#stack" className="nav-link">
               Stack
+            </a>
+            <a href="/blog" className="nav-link">
+              Writing
             </a>
           </div>
           <a
@@ -1897,6 +1901,110 @@ export default function Home() {
         </div>
       </section>
 
+      {/* WRITING */}
+      <section
+        id="writing"
+        style={{
+          position: "relative",
+          zIndex: 2,
+          borderTop: "1px solid #D7D0C2",
+        }}
+      >
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+              flexWrap: "wrap",
+              gap: 12,
+              marginBottom: 28,
+            }}
+          >
+            <div>
+              <div style={sectionLabel}>// 05 — WRITING</div>
+              <h2 style={h2Style}>Notes from the build</h2>
+            </div>
+            <a
+              href="/blog"
+              className="nav-link"
+              style={{
+                fontFamily: MONO,
+                fontSize: 12.5,
+                fontWeight: 600,
+                color: "#17150F",
+              }}
+            >
+              Read all writing →
+            </a>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {posts.slice(0, 2).map((p) => (
+              <a
+                key={p.slug}
+                href={`/blog/${p.slug}`}
+                className="card-hover"
+                style={{
+                  display: "block",
+                  background: "#FCFBF6",
+                  border: "1px solid #D7D0C2",
+                  borderRadius: 16,
+                  padding: "26px 28px",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: MONO,
+                    fontSize: 11,
+                    letterSpacing: "0.05em",
+                    color: "#908A7C",
+                    marginBottom: 11,
+                    display: "flex",
+                    gap: 14,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <span>{formatDate(p.date)}</span>
+                  <span style={{ color: "#FF5A1F" }}>{p.readingTime}</span>
+                </div>
+                <h3
+                  style={{
+                    fontFamily: MONO,
+                    fontSize: 22,
+                    fontWeight: 700,
+                    letterSpacing: "-0.01em",
+                    margin: "0 0 11px",
+                    color: "#17150F",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {p.title}
+                </h3>
+                <p
+                  style={{
+                    fontFamily: GROTESK,
+                    fontSize: 15,
+                    lineHeight: 1.6,
+                    color: "#3A362E",
+                    margin: "0 0 14px",
+                    maxWidth: 720,
+                  }}
+                >
+                  {p.excerpt}
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+                  {p.tags.map((t) => (
+                    <span key={t} style={tagChip}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section
         id="contact"
@@ -1909,7 +2017,7 @@ export default function Home() {
       >
         <div style={{ maxWidth: 1180, margin: "0 auto", padding: "80px 40px" }}>
           <div style={{ ...sectionLabel, marginBottom: 18 }}>
-            // 05 — CONTACT
+            // 06 — CONTACT
           </div>
           <h2
             style={{

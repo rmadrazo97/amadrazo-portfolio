@@ -1,0 +1,625 @@
+<style>
+.postdoc{
+  --accent:#FF5A1F;
+  --accent-soft:#FBE9DF;
+  --ink:#17150F;
+  --dark:#3A362E;
+  --slate:#5C574C;
+  --muted:#908A7C;
+  --border:#D7D0C2;
+  --off:#FCFBF6;
+  --off2:#EFEBE2;
+  --white:#FCFBF6;
+  --green:#1f9d63;
+  --amber:#c9871f;
+  --red:#cc3b2e;
+  --maxw:880px;
+  --tocw:288px;
+  --font:'Space Grotesk',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+}.postdoc *{box-sizing:border-box}.postdoc{scroll-behavior:smooth}.postdoc{
+  margin:0;font-family:var(--font);color:var(--ink);background:var(--white);
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+}.postdoc /* ---------- layout ---------- */
+.shell{display:flex;align-items:flex-start;max-width:1260px;margin:0 auto}.postdoc nav.toc{
+  position:sticky;top:0;align-self:flex-start;width:var(--tocw);flex:0 0 var(--tocw);
+  height:100vh;overflow-y:auto;padding:26px 20px 40px 26px;border-right:1px solid var(--border);
+  background:var(--off);
+}.postdoc main{flex:1 1 auto;min-width:0;padding:0 48px 120px;max-width:calc(var(--maxw) + 96px);margin:0 auto}@media(max-width:1024px){.postdoc .shell{display:block}.postdoc nav.toc{position:static;width:auto;height:auto;border-right:none;border-bottom:1px solid var(--border)}.postdoc main{padding:0 22px 80px}}.postdoc /* ---------- TOC ---------- */
+.brandmark{display:flex;align-items:center;gap:9px;margin-bottom:6px;font-weight:600;font-size:18px;letter-spacing:-.01em}.postdoc .brandmark .wm b{color:var(--accent)}.postdoc .toc .kick{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--muted);margin:18px 0 8px;font-weight:600}.postdoc .toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}.postdoc .toc ol li{counter-increment:toc;margin:1px 0}.postdoc .toc ol li a{
+  display:flex;gap:9px;text-decoration:none;color:var(--slate);font-size:13.5px;line-height:1.32;
+  padding:5px 8px;border-radius:7px;align-items:baseline
+}.postdoc .toc ol li a::before{content:counter(toc,decimal-leading-zero);color:var(--muted);font-variant-numeric:tabular-nums;font-size:11.5px;font-weight:600;min-width:20px}.postdoc .toc ol li a:hover{background:var(--accent-soft);color:var(--ink)}.postdoc .toc ol li a.active{background:var(--accent-soft);color:var(--ink);font-weight:500}.postdoc .toc ol li a.active::before{color:var(--accent)}.postdoc .toc .meta{margin-top:22px;font-size:11.5px;color:var(--muted);line-height:1.5;border-top:1px solid var(--border);padding-top:14px}.postdoc /* ---------- cover ---------- */
+.cover{padding:54px 0 26px;border-bottom:2px solid var(--ink)}.postdoc .cover .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.16em;color:var(--accent);font-weight:600;margin-bottom:14px}.postdoc .cover h1{font-size:40px;line-height:1.08;letter-spacing:-.022em;margin:0 0 16px;font-weight:600}.postdoc .cover h1 b{color:var(--accent);font-weight:600}.postdoc .cover .sub{font-size:18px;color:var(--slate);max-width:680px;margin:0}.postdoc .cover .docmeta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:24px;font-size:13px;color:var(--muted)}.postdoc .cover .docmeta b{color:var(--dark);font-weight:600}.postdoc /* ---------- sections ---------- */
+section{padding-top:46px}.postdoc section>h2{
+  font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);font-weight:600;
+  margin:0 0 6px;display:flex;align-items:center;gap:10px
+}.postdoc section>h2 .n{font-variant-numeric:tabular-nums}.postdoc section .h{font-size:27px;line-height:1.16;letter-spacing:-.018em;margin:0 0 18px;font-weight:600}.postdoc h3{font-size:19px;letter-spacing:-.01em;margin:30px 0 8px;font-weight:600}.postdoc h4{font-size:15.5px;margin:20px 0 6px;font-weight:600}.postdoc p{margin:0 0 14px}.postdoc a{color:var(--accent)}.postdoc strong, .postdoc b{font-weight:600}.postdoc em{font-style:italic;color:var(--dark)}.postdoc ul, .postdoc ol{margin:0 0 14px;padding-left:22px}.postdoc li{margin:5px 0}.postdoc .lead{font-size:18px;line-height:1.6;color:var(--dark)}.postdoc .cite{font-size:.82em;color:var(--muted);text-decoration:none;white-space:nowrap;font-weight:500}.postdoc .cite:hover{color:var(--accent)}.postdoc .cite::before{content:"↗ "}.postdoc hr.soft{border:0;border-top:1px solid var(--border);margin:34px 0}.postdoc /* ---------- components ---------- */
+.callout{
+  border:1px solid var(--border);border-left:3px solid var(--accent);background:var(--off);
+  border-radius:0 10px 10px 0;padding:16px 18px;margin:18px 0;font-size:14.5px
+}.postdoc .callout .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);font-weight:600;margin-bottom:5px}.postdoc .callout.ink{border-left-color:var(--ink)}.postdoc .callout.ink .lbl{color:var(--ink)}.postdoc .callout.amber{border-left-color:var(--amber);background:#fdf8ef}.postdoc .callout.amber .lbl{color:var(--amber)}.postdoc .pull{font-size:21px;line-height:1.4;font-weight:500;color:var(--ink);border-left:3px solid var(--accent);padding:2px 0 2px 20px;margin:26px 0}.postdoc .pull b{color:var(--accent)}.postdoc .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}.postdoc .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}@media(max-width:680px){.postdoc .grid2, .postdoc .grid3{grid-template-columns:1fr}}.postdoc .card{border:1px solid var(--border);border-radius:11px;padding:16px 17px;background:var(--white)}.postdoc .card h4{margin:0 0 6px}.postdoc .card p{font-size:14px;color:var(--slate);margin:0}.postdoc .card .tag{display:inline-block;font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:20px;margin-bottom:8px}.postdoc .card ul{margin:6px 0 0;padding-left:16px}.postdoc .card li{font-size:13px;color:var(--slate);line-height:1.45;margin:5px 0}.postdoc .unblk{font-size:11px;color:var(--accent);font-weight:600;margin:9px 0 0;letter-spacing:.01em}.postdoc .stat{border:1px solid var(--border);border-radius:11px;padding:16px;text-align:center;background:var(--off)}.postdoc .stat .big{font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--ink);line-height:1}.postdoc .stat .big.o{color:var(--accent)}.postdoc .stat .lbl{font-size:12.5px;color:var(--slate);margin-top:7px;line-height:1.35}.postdoc /* stacked full-width move banners */
+.movestack{margin:18px 0}.postdoc .mvrow{display:flex;gap:24px;align-items:flex-start;border:1px solid var(--border);border-radius:11px;padding:15px 18px;background:var(--white);margin-bottom:12px}.postdoc .mvrow .mvhead{flex:0 0 228px}.postdoc .mvrow .mvhead .tag{margin-bottom:8px}.postdoc .mvrow .mvhead h4{margin:0;font-size:16px;line-height:1.24}.postdoc .mvrow .mvbody{flex:1 1 auto;min-width:0}.postdoc .mvrow ul{margin:0;padding-left:17px;columns:2;column-gap:30px}.postdoc .mvrow li{font-size:12.5px;line-height:1.45;color:var(--slate);margin:0 0 7px;break-inside:avoid}.postdoc .mvrow.cap{background:var(--accent-soft);border-color:#F1CDB6}@media(max-width:680px){.postdoc .mvrow{flex-direction:column;gap:11px}.postdoc .mvrow .mvhead{flex:none}.postdoc .mvrow ul{columns:1}}.postdoc /* vertical step plan */
+.plan{margin:22px 0 8px}.postdoc .vstep{display:flex;gap:16px;position:relative}.postdoc .vstep:not(:last-child){padding-bottom:18px}.postdoc .vstep:not(:last-child)::before{content:"";position:absolute;left:17px;top:38px;bottom:0;width:2px;background:var(--border)}.postdoc .vmark{flex:0 0 36px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;position:relative;z-index:1}.postdoc .vbody{flex:1 1 auto;border:1px solid var(--border);border-radius:11px;padding:15px 17px;background:var(--white)}.postdoc .vbody h4{margin:0 0 10px;font-size:16px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}.postdoc .vbody h4 .vt{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);font-weight:600}.postdoc .vgrid{display:grid;grid-template-columns:1.7fr 1fr 1fr;gap:16px}.postdoc .vgrid .vlbl{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;margin-bottom:3px}.postdoc .vgrid p{margin:0;font-size:13px;color:var(--slate);line-height:1.5}.postdoc .vstep.dark .vmark{background:var(--ink)}.postdoc .vstep.dark .vbody{background:var(--ink);border-color:var(--ink)}.postdoc .vstep.dark .vbody h4{color:var(--white)}.postdoc .vstep.dark .vgrid p{color:#cbd5e1}.postdoc .vstep.dark .vgrid .vlbl{color:var(--muted)}.postdoc .vstep.dark .vlist li{color:#cbd5e1}.postdoc .vstep.dark .vlist li b{color:var(--white)}.postdoc .plan-band{border:1px solid var(--border);background:var(--off);border-radius:9px;padding:10px 14px;font-size:12.5px;color:var(--slate);margin:0 0 6px 52px}.postdoc .plan-band b{color:var(--accent);text-transform:uppercase;letter-spacing:.06em;font-size:11px}.postdoc /* foundation block + sub-phases + outputs label */
+.vstep.found .vbody{background:var(--accent-soft);border-color:#F1CDB6}.postdoc .vobj{font-size:13px;color:var(--dark);margin:2px 0 12px;line-height:1.5}.postdoc .vobj b{color:var(--ink)}.postdoc .subgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.postdoc .subcard{background:var(--white);border:1px solid #F1CDB6;border-radius:9px;padding:11px 13px;display:flex;flex-direction:column}.postdoc .subcard .subn{align-self:flex-start;font-size:11px;font-weight:600;color:#fff;background:var(--accent);border-radius:5px;padding:1px 7px;margin-bottom:7px}.postdoc .subcard b{display:block;font-size:13px;margin-bottom:4px;color:var(--ink)}.postdoc .subcard p{margin:0;font-size:11.5px;color:var(--slate);line-height:1.45}.postdoc .subcard .sdec{margin-top:7px;font-size:10.5px;color:var(--accent);font-weight:600;letter-spacing:.02em}.postdoc .outlabel{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:var(--ink);font-weight:600;margin:18px 0 16px 52px}.postdoc .vbody h4 .vout{color:var(--muted)}.postdoc .vbody h4 .vres{color:var(--accent)}.postdoc .vpar-lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:600;margin:0 0 11px 52px}.postdoc .vpar-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}.postdoc .vpar-grid .vstep{padding-bottom:0}.postdoc .vpar-grid .vstep::before{display:none}.postdoc .vpar-grid .vbody{display:flex;flex-direction:column}.postdoc .vlist{display:grid;grid-template-columns:1fr 1fr;gap:8px 20px;margin:11px 0 2px;padding:0;list-style:none}.postdoc .vlist li{font-size:12.5px;line-height:1.5;color:var(--slate);margin:0;padding-left:14px;position:relative}.postdoc .vlist li::before{content:"";position:absolute;left:2px;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent)}.postdoc .vlist.wide{grid-template-columns:1fr;gap:7px}.postdoc .vlist.wide li b{color:var(--ink)}@media(max-width:680px){.postdoc .vpar-grid{grid-template-columns:1fr}.postdoc .vlist{grid-template-columns:1fr}}@media(max-width:680px){.postdoc .vgrid{grid-template-columns:1fr;gap:9px}.postdoc .plan-band{margin-left:0}.postdoc .subgrid{grid-template-columns:1fr}.postdoc .outlabel{margin-left:0}}.postdoc table{width:100%;border-collapse:collapse;margin:18px 0;font-size:13.5px}.postdoc th, .postdoc td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);vertical-align:top}.postdoc th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600;background:var(--off)}.postdoc td b{font-weight:600}.postdoc .pill{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 9px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}.postdoc .pill.hi{background:#fbe9e7;color:var(--red)}.postdoc .pill.me{background:#fbf1e0;color:var(--amber)}.postdoc .pill.lo{background:#e8f5ee;color:var(--green)}.postdoc .pill.t1{background:var(--accent-soft);color:var(--accent)}.postdoc .pill.t2{background:#eef1f5;color:var(--slate)}.postdoc .chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}.postdoc .chips span{font-size:12.5px;background:var(--off2);border:1px solid var(--border);color:var(--dark);padding:4px 11px;border-radius:20px}.postdoc .assume{counter-reset:as;list-style:none;padding:0}.postdoc .assume li{position:relative;padding:10px 0 10px 40px;border-bottom:1px solid var(--border);counter-increment:as;font-size:14.5px}.postdoc .assume li::before{content:"A"counter(as);position:absolute;left:0;top:10px;font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 6px;border-radius:6px}.postdoc .gap li::before{content:"G"counter(as);color:var(--amber);background:#fbf1e0}.postdoc figure{margin:26px 0;border:1px solid var(--border);border-radius:12px;padding:18px 18px 12px;background:var(--off);overflow-x:auto}.postdoc figure svg{display:block;max-width:100%;height:auto;margin:0 auto}.postdoc figcaption{font-size:12.5px;color:var(--muted);margin-top:12px;text-align:center;line-height:1.45}.postdoc .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:10px;font-size:11.5px;color:var(--slate)}.postdoc .legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}.postdoc .refs{font-size:13px;columns:1}.postdoc .refs ol{padding-left:24px}.postdoc .refs li{margin:6px 0;line-height:1.45;color:var(--slate)}.postdoc .refs a{word-break:break-word}.postdoc footer.docfoot{margin-top:60px;padding-top:22px;border-top:2px solid var(--ink);font-size:12.5px;color:var(--muted)}.postdoc .tier-tag{font-size:10.5px;font-weight:600;padding:1px 7px;border-radius:5px}.postdoc sup.fn{font-size:.7em;color:var(--accent);font-weight:600;vertical-align:super;line-height:0}.postdoc .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}@media(max-width:680px){.postdoc .kpi-row{grid-template-columns:1fr 1fr}}.postdoc /* ---------- contact ---------- */
+.contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 4px}@media(max-width:680px){.postdoc .contact-grid{grid-template-columns:1fr 1fr}}.postdoc .contact-card{display:flex;align-items:center;gap:11px;border:1px solid var(--border);border-radius:11px;padding:12px 13px;background:var(--white);text-decoration:none;color:var(--ink);transition:border-color .15s,background .15s}.postdoc .contact-card:hover{border-color:var(--accent);background:var(--accent-soft)}.postdoc .contact-card .ic{flex:0 0 36px;width:36px;height:36px;border-radius:9px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;line-height:1}.postdoc .contact-card:hover .ic{background:var(--accent);color:#fff}.postdoc .contact-card .cm{min-width:0;flex:1 1 auto}.postdoc .contact-card .cl{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}.postdoc .contact-card .cv{display:block;font-size:13px;font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.postdoc .contact-card .ar{color:var(--muted);font-size:12px;font-weight:600}.postdoc .contact-card:hover .ar{color:var(--accent)}
+/* --- brand overrides --- */
+.postdoc{ background:transparent; color:#3A362E; max-width:none; padding:0; }
+.postdoc .cover h1,.postdoc .h,.postdoc h2,.postdoc h3,.postdoc h4,
+.postdoc .eyebrow,.postdoc .kick,.postdoc .tag,.postdoc .lbl,.postdoc .vt,
+.postdoc .subn,.postdoc th,.postdoc .pill,.postdoc .stat .big,.postdoc .brandmark,
+.postdoc a.cite,.postdoc .unblk,.postdoc .plan-band b,.postdoc .vpar-lbl,
+.postdoc .outlabel,.postdoc .vgrid .vlbl{ font-family:'JetBrains Mono',monospace; }
+.postdoc .h,.postdoc h3,.postdoc h4{ color:#17150F; }
+.postdoc .cover{ border-bottom-color:#17150F; }
+</style>
+<!-- COVER -->
+<div class="cover" id="top">
+  <div class="eyebrow">AI Engineering Practice · Strategy &amp; Plan</div>
+  <h1>A plan to reach <b>AI Readiness</b> for an AI-native consultancy —<br>from an AI&nbsp;Engineering perspective.</h1>
+  <p class="sub">Turning a salad of one-off agents and tools into a standardized AI&nbsp;Engineering platform — one that builds from a <b>compounding set of reusable building blocks</b>, so every next solution ships faster, safer, and cheaper than the last.</p>
+  <p class="sub" style="font-size:13.5px;color:var(--muted);margin-top:16px;max-width:680px"><b style="color:var(--dark);font-weight:600">A generalized reference.</b> This is an anonymized, white-labeled version of a real AI-engineering strategy, shared as a playbook any boutique or mid-size AI consultancy can adapt. All firm-specific names, products, people, geographies, and figures have been removed; external research, citations, and tooling recommendations are kept intact.</p>
+</div>
+
+
+<!-- ============== 1. EXECUTIVE SUMMARY ============== -->
+<section id="exec">
+  <h2><span class="n">01</span> · Executive Summary</h2>
+  <div class="h">One platform, two delivery tiers, one learning loop</div>
+
+  <p class="lead">The firm sells itself as an AI-native consultancy, but underneath the brand the engineering practice is inconsistent.</p>
+  <p>Every project rebuilds the same building blocks, and the best of them are buried inside individual solutions where no one can see, review, or reuse them.</p>
+  <p>The only AI Engineering solution in production for customers is a low-code, high-level agent — not the deeper engineering capability that would put the firm on the leading edge of the market and deliver on its stated mission: <em>guiding human organizations through AI-driven change, from roadmaps to impact</em>.</p>
+  <p>The gap between <em>what the firm sells</em> and <em>what it can reliably build and maintain</em> is the single biggest risk to the firm's 2026 plans.</p>
+
+  <div class="pull">The fix is not more tools or more awareness sessions — it is a <b>shift in mentality</b>.<br><br>
+  At its core: a modular platform whose pieces assemble like a puzzle, plus a cognitive loop where consultants bake their judgement into it — building digital twins that multiply the firm's capabilities, fuelled by its own IP.<br><br>
+  But the deeper change is <b>how the firm builds</b>. Not every solution will come from the platform — some will run on low-/no-code builders when that fits the client (over-relying on them is a named risk). What makes the practice credible is the same <b>engineering discipline</b> behind whichever path it chooses.</div>
+
+</section>
+
+
+<!-- ============== 2. STRATEGIC DIRECTIONS & PLAN ============== -->
+<section id="roadmap">
+  <h2><span class="n">02</span> · Strategic Directions &amp; Plan</h2>
+  <div class="h">Five directions, sequenced into a plan</div>
+  <p>The whole plan in one view — <b>five directions</b> to commit to together, and the phased roadmap that delivers them. More than tools or process, the aim is a <b>shared shift in mentality and culture</b> — becoming an AI-native company across the board, where every team builds and works with AI as a default way of working.</p>
+
+  <div class="movestack">
+    <div class="mvrow">
+      <div class="mvhead"><span class="tag">Move 1 — Platform</span><h4>Own one platform; two offerings by use case</h4></div>
+      <div class="mvbody"><ul>
+        <li>A <b>two-tier model</b> on one AI engineering platform the firm owns.</li>
+        <li><b>Low-code agents</b> on builders (e.g. Snowflake, Copilot Studio) where the data lives.</li>
+        <li><b>Custom-engineered agents</b> on a suite of reusable modules.</li>
+        <li>One visible <b>catalog</b> — each capability has a single best implementation.</li>
+      </ul></div>
+    </div>
+    <div class="mvrow">
+      <div class="mvhead"><span class="tag">Move 2 — The IP</span><h4>The cognitive loop is the moat</h4></div>
+      <div class="mvbody"><ul>
+        <li>A learning loop between <b>human capital</b> (judgement) and <b>token capital</b> (the AI the firm owns).</li>
+        <li>Consultants encode workflows &amp; judgement; it <b>improves with every use</b>.</li>
+        <li>The edge isn't the model — it's <b>the loop on top</b>.</li>
+        <li>Compounds into <b>IP no competitor can copy</b>.</li>
+      </ul></div>
+    </div>
+    <div class="mvrow">
+      <div class="mvhead"><span class="tag">Move 3 — Talent</span><h4>Create the FDE tier</h4></div>
+      <div class="mvbody"><ul>
+        <li>A <b>Forward Deployed / Applied Delivery Engineer</b> owns low-code, simpler builds.</li>
+        <li>Best AI engineers stay on <b>complex systems, not simple solutions</b>.</li>
+        <li>Uses scarce senior talent where it's most valuable.</li>
+        <li>Answers a real <b>talent-retention risk</b>.</li>
+      </ul></div>
+    </div>
+    <div class="mvrow">
+      <div class="mvhead"><span class="tag">Move 4 — Sovereignty</span><h4>Sovereign by design = differentiator</h4></div>
+      <div class="mvbody"><ul>
+        <li>Provider-portable, EU-resident, AI-Act-ready architecture.</li>
+        <li>Guarantees a US-parented giant <b>legally cannot make</b>.</li>
+        <li>What <b>European buyers increasingly demand</b>.</li>
+      </ul></div>
+    </div>
+    <div class="mvrow cap">
+      <div class="mvhead"><span class="tag">Move 5 — Mentality &amp; proof</span><h4>Change the mentality, not just the toolkit</h4></div>
+      <div class="mvbody"><ul>
+        <li>A <b>shared way of looking at AI</b> — build &amp; improve systems, not just consume products.</li>
+        <li>A <b>cross-functional team</b> sharing building blocks across projects.</li>
+        <li><b>Dogfood</b> the firm's own solutions — beat off-the-shelf ChatGPT.</li>
+        <li>What compounds is the firm's discipline in how it builds. <b>Proof&nbsp;&gt;&nbsp;promises.</b></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:36px">The plan — build the foundation first; the rest are outputs</h3>
+  <p>The plan front-loads <b>one real investment: Step 1 — establishing how the firm builds AI, and the technical capacity to do it</b>. Everything after it — the first proof, reuse, a packaged offering, and scale — is an <b>output of that foundation</b>, not separate work. This is what directly addresses the challenges in §3: no reuse, the credibility gap, talent risk, and the maintenance gap.</p>
+
+  <div class="plan">
+    <div class="vstep found">
+      <div class="vmark">1</div>
+      <div class="vbody">
+        <h4><span class="vt">Step 1 · The foundation</span> Establish the way of building &amp; technical capacity</h4>
+        <p class="vobj">Set <b>how the firm builds AI</b> — a modular way of working, engineering standards, and one stack choice. From that choice follows the <b>technical capacity</b> — platform, building blocks, evals, skills — that builds the firm's <b>expertise</b> to support its own products and ship faster and better. This is the one real investment; the steps below are its outputs.</p>
+        <div class="subgrid">
+          <div class="subcard"><span class="subn">1a</span><b>Standardize the way of building</b><p>Choose the <b>two-tier stack</b> — a custom stack by default, low-code / vendor platforms when a use case requires it — and set the modular engineering rules &amp; practices.</p><span class="sdec">Decide: stack + standards signed off</span></div>
+          <div class="subcard"><span class="subn">1b</span><b>Build the technical foundations</b><p>Put the platform's key pillars in place — observability, context management, infrastructure-as-code (IaC), and reusable infrastructure blocks.</p><span class="sdec">Done: observability live; IaC &amp; first reusable infra blocks in place</span></div>
+          <div class="subcard"><span class="subn">1c</span><b>Build the team's expertise</b><p>Every AI engineer learns the stack and the building blocks of the firm's AI capability — becoming experts and a cross-functional, multidisciplinary team that can step into any project.</p><span class="sdec">Done: any engineer can build on the platform, across projects</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="outlabel">↳ Building on the foundation</div>
+
+    <div class="vpar-lbl">↳ independent — run in parallel</div>
+    <div class="vpar-grid">
+      <div class="vstep">
+        <div class="vmark">2</div>
+        <div class="vbody">
+          <h4><span class="vt vout">Process</span> First agent</h4>
+          <ul class="vlist">
+            <li>Re-platform <b>the flagship internal agent</b> — split into modular blocks — and <b>dogfood</b> the firm's own tools internally.</li>
+            <li>Reuse those building blocks across <b>1+ projects</b>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vstep">
+        <div class="vmark">3</div>
+        <div class="vbody">
+          <h4><span class="vt vout">Process</span> The FDE tier</h4>
+          <ul class="vlist">
+            <li>Free <b>experienced AI engineers</b> to build the firm's stack &amp; technical capacity.</li>
+            <li>Use <b>FDEs</b> (interns, juniors) for low/no-code implementations.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="vstep">
+      <div class="vmark">4</div>
+      <div class="vbody">
+        <h4><span class="vt vres">Output</span> Technical capacity &amp; agile agent building</h4>
+        <ul class="vlist wide">
+          <li><b>What the firm gains</b> — a reusable platform it owns (modular blocks, evals, observability, IaC) = real technical capacity.</li>
+          <li><b>What it enables</b> — agile agent building: prototype, validate and ship fast, because common challenges are solved once and reused.</li>
+          <li><b>Proof</b> — new agents built mostly by composition; the firm can build and maintain production-grade systems for internal products and clients.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="vstep dark">
+      <div class="vmark">5</div>
+      <div class="vbody">
+        <h4><span class="vt vres">Outcome</span> Sovereignty &amp; mentality</h4>
+        <ul class="vlist wide">
+          <li>Ship like a <b>top-tier AI studio</b> — reusing proven tools, frameworks, and the experts in them.</li>
+          <li><b>Quickly build POCs</b> on a stack that can be <b>deployed at scale</b>.</li>
+          <li>Products <b>ready for certifications</b> — AI-Act-ready and auditable.</li>
+          <li><b>Sovereign</b> — resilient to platform changes and provider shifts in the industry.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="plan-band"><b>Always-on ·</b> dogfooding · internal hackathons · evals-in-CI · the cognitive loop · compliance gates — these run throughout, not as a step.</div>
+</section>
+
+
+<!-- ============== 3. THE CHALLENGES ============== -->
+<section id="current">
+  <h2><span class="n">03</span> · Current State</h2>
+  <div class="h">The challenges to address</div>
+
+  <h3>1. Wasted effort &amp; no reuse ("mono" agents)</h3>
+  <p>Every AI project rebuilds the same common building blocks from scratch:</p>
+  <ul>
+    <li>The result is <b>several implementations of the same capability</b> where there should be one best version — and the team never collaborates to build the single, top-tier solution for each block.</li>
+    <li>The best work stays <b>buried inside individual solutions</b>, invisible at the top level, so no one can see, review, or improve it.</li>
+    <li><b>Engineering collaboration suffers</b>: feedback, code reviews and shared technical expertise are hard to build when nothing is reused or visible.</li>
+  </ul>
+
+  <h3>2. Low-code is a real business line carrying layered risk</h3>
+  <p>Low-code agents are a genuine opportunity and should continue — but today they are the firm's <b>only production proof to customers</b>, and they carry four stacked risks:</p>
+  <div class="grid2">
+    <div class="card"><span class="tag">Talent</span><h4>Frontier FOMO &amp; retention risk</h4><ul>
+      <li>AI engineers feel trapped doing low-code config — a <b>retention risk</b>.</li>
+      <li>Seniors on no-code tools build <b>technical debt</b>, not deep capability.</li>
+      <li>Consulting needs a dedicated <b>FDE role</b> to own low/no-code delivery.</li>
+      <li>Without an <b>architecture strategy</b>, coding agents pile up technical debt and slow teams down <a class="cite" target="_blank" rel="noopener" href="https://www.cio.com/article/4124515/the-ai-productivity-trap-why-your-best-engineers-are-getting-slower.html">CIO</a>.</li>
+    </ul></div>
+    <div class="card"><span class="tag">Literacy</span><h4>Weak business↔tech translation</h4><ul>
+      <li>The delivery side has low technical literacy, so business needs are hard to turn into what's actually buildable.</li>
+      <li>Use cases get scoped without knowing the limits of low-code tools.</li>
+      <li>The easy 80% works; the hard parts — error handling, complex logic, memory — need real engineering <a class="cite" target="_blank" rel="noopener" href="https://inkeep.com/blog/agent-frameworks-platforms-overview">Inkeep</a>.</li>
+    </ul></div>
+    <div class="card"><span class="tag">Day 2</span><h4>No maintenance / handoff muscle</h4><ul>
+      <li>The firm is not building ops, maintenance and handoff capability.</li>
+      <li>Partners for agentic maintenance are scarce — agents drift on prompts, models and RAG.</li>
+      <li>If the firm can't master a solution, it can't hand it off.</li>
+    </ul></div>
+    <div class="card"><span class="tag">Lock-in</span><h4>Lock-in &amp; sovereignty risk</h4><ul>
+      <li>Low-code agents are bound to a proprietary runtime and to where the data lives.</li>
+      <li>Big platforms can change pricing, terms or access — moves the firm can't avoid or control.</li>
+      <li>A <b>sovereignty risk</b>: the firm's practice shouldn't depend on one provider's decisions.</li>
+    </ul></div>
+  </div>
+
+  <h3>3. Internal tools aren't built to compound</h3>
+  <ul>
+    <li>Internal tools (the flagship internal agent, the internal copilot experiments) are <b>siloed</b>, with no shared AI strategy.</li>
+    <li>No framework <b>absorbs common challenges once</b>, so the next build is no faster — effort doesn't compound.</li>
+    <li>No <b>dogfooding</b> discipline: the firm doesn't prove its own agents beat off-the-shelf tools.</li>
+  </ul>
+
+  <h3>4. The credibility gap</h3>
+  <ul>
+    <li>The firm markets deep AI capability while the engineering foundation is inconsistent — the brand promise and the delivery reality have <b>diverged</b>. This is the central commercial risk.</li>
+    <li>Gartner expects most early agentic implementations to miss their targets on integration, governance and talent gaps — not model quality <a class="cite" target="_blank" rel="noopener" href="https://www.stackone.com/blog/gartner-on-ai-agent-integration/">Gartner</a> <em>(forward-looking)</em>.</li>
+    <li>The firms that win are the ones with a <b>real platform underneath</b>.</li>
+    <li><b>The consequence:</b> not building something better than commercial tools for the firm's own work undermines its <b>credibility</b> and its <b>literacy</b> when selling AI services.</li>
+  </ul>
+
+  <h3>5. The organisation can't make time</h3>
+  <ul>
+    <li>By the nature of consulting, engineers are <b>pulled across client work</b> — it's hard to carve out time to build a shared stack, platform and technical foundations.</li>
+    <li>Without a shared <b>mentality, common stack and engineering practices</b>, there's no foundation to build on — so it's easier to keep starting from scratch, and the gap compounds.</li>
+    <li><b>Every other challenge is downstream of this</b> — a platform that is "everyone's job in their spare time" never ships.</li>
+    <li>The fix (§9): a <b>protected platform team</b> that treats the platform as a product — the precondition for everything else.</li>
+  </ul>
+
+</section>
+
+
+<!-- ============== 4. STRATEGIC VISION ============== -->
+<section id="vision">
+  <h2><span class="n">04</span> · Strategic Vision &amp; the AI Ecosystem</h2>
+  <div class="h">A full AI ecosystem — tooling, process, and a mentality shift</div>
+
+  <p class="lead">The goal isn't "an agent builder." It's a <b>complete AI ecosystem</b> — where the platform, the way of building, and a shared mentality stack into something that <b>unblocks the challenges by nature</b>, not by heroics.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 292" width="760" role="img" aria-label="The AI ecosystem: platform, way of building and mentality stack into one ecosystem">
+      <style>
+        .ek{font:600 10px var(--font,sans-serif);fill:#908A7C;letter-spacing:.8px}
+        .el{font:600 14px var(--font,sans-serif);fill:#fff}
+        .es{font:400 9.5px var(--font,sans-serif);fill:#cbd5e1}
+        .ec{font:600 12.5px var(--font,sans-serif);fill:#FF5A1F}
+        .ea{font:600 9.5px var(--font,sans-serif);fill:#908A7C;letter-spacing:.5px}
+      </style>
+      <text x="380" y="22" class="ek" text-anchor="middle">PLATFORM + WAY OF BUILDING + MENTALITY → ONE ECOSYSTEM</text>
+
+      <rect x="210" y="42" width="340" height="58" rx="10" fill="#FF5A1F"/>
+      <text x="380" y="67" class="el" text-anchor="middle">MENTALITY</text>
+      <text x="380" y="85" class="es" text-anchor="middle" style="fill:#fff">shared way of looking at AI · dogfooding · collaboration</text>
+
+      <rect x="160" y="110" width="440" height="58" rx="10" fill="#3A362E"/>
+      <text x="380" y="135" class="el" text-anchor="middle">THE WAY OF BUILDING</text>
+      <text x="380" y="153" class="es" text-anchor="middle">modular standards · golden path · engineering practices</text>
+
+      <rect x="96" y="178" width="568" height="58" rx="10" fill="#17150F"/>
+      <text x="380" y="203" class="el" text-anchor="middle">PLATFORM &amp; PILLARS</text>
+      <text x="380" y="221" class="es" text-anchor="middle" style="font-size:9px">open-source frameworks/tools · observability · context mgmt · IaC · reusable blocks · evals · catalog</text>
+
+      <text x="58" y="150" class="ea" transform="rotate(-90 58 150)" text-anchor="middle">BUILDS UP ↑</text>
+      <text x="380" y="266" class="ec" text-anchor="middle">= an AI ecosystem that unblocks the challenges by nature</text>
+    </svg>
+    <figcaption>Three layers compound into one ecosystem: the <b>platform &amp; pillars</b> (the foundation), the <b>way of building</b> (standards &amp; the paved road), and the <b>mentality</b> (how the team thinks about AI). Stacked, they unblock the challenges by design — not by one-off effort.</figcaption>
+  </figure>
+
+  <h3>What the ecosystem unblocks — by nature</h3>
+  <div class="grid2">
+    <div class="card"><span class="tag">Implicit collaboration</span><h4>One framework everyone improves</h4><p>Consultants and engineers improve the shared framework just by building on it — the single best version of each block wins, instead of divergent forks.</p><p class="unblk">↳ Unblocks #1 (no reuse) · #5 (no time)</p></div>
+    <div class="card"><span class="tag">Dogfooding</span><h4>Feedback &amp; literacy from real use</h4><p>The firm runs on its own platform; real usage feeds the cognitive loop, and sales learn the capabilities from experience, not slideware.</p><p class="unblk">↳ Unblocks #3 (compounding) · #4 (credibility)</p></div>
+    <div class="card"><span class="tag">Technical expertise</span><h4>Depth on one common stack</h4><p>Engineers go deep on a shared stack and reusable blocks instead of scattering across one-offs — real capability compounds in the team.</p><p class="unblk">↳ Unblocks #2 (talent)</p></div>
+    <div class="card"><span class="tag">Maintenance capacity</span><h4>Operate &amp; hand off cleanly</h4><p>Standard observability, evals and ops mean the firm can maintain what it ships and hand it off cleanly — the Day-2 muscle, built in.</p><p class="unblk">↳ Unblocks #2 (Day 2)</p></div>
+  </div>
+
+  <div class="pull">The firm's two forms of capital are its people (<b>human capital</b>) and its agents (<b>token capital</b>). The strategy is to make them <b>compound each other</b> — every engagement makes both the consultants and the platform smarter.</div>
+</section>
+
+
+<!-- ============== 5. FRAMEWORK & ARCHITECTURE ============== -->
+<section id="framework">
+  <h2><span class="n">05</span> · Proposed Framework &amp; Reference Architecture</h2>
+  <div class="h">The main pillars a modular platform needs</div>
+
+  <p>A modular agent platform is built from <b>small, reusable pieces assembled like a puzzle</b> — and it stands on a handful of <b>shared pillars</b>, each a capability the whole team builds on instead of rebuilding per project.</p>
+
+  <div class="grid3">
+    <div class="card"><span class="tag">Library</span><h4>Reusable building blocks</h4><p>Small composable pieces — skills, prompts, tools, connectors — assembled like a puzzle, not rebuilt each time.</p></div>
+    <div class="card"><span class="tag">Catalog</span><h4>A visible index</h4><p>One place where the <b>single best version</b> of each block lives, so everyone can see, review and reuse it.</p></div>
+    <div class="card"><span class="tag">Golden path</span><h4>A standard way to build</h4><p>One supported scaffold to start an agent, with quality and compliance built in from the first commit.</p></div>
+    <div class="card"><span class="tag">Quality</span><h4>Observability &amp; evals</h4><p>See what agents do in production, and <b>prove quality before anything ships</b>.</p></div>
+    <div class="card"><span class="tag">Portability</span><h4>Model gateway</h4><p>Swap models and providers freely — never locked to one platform (sovereignty).</p></div>
+    <div class="card"><span class="tag">Operations</span><h4>Ops &amp; maintenance</h4><p>Run, monitor and hand off what the firm builds — the Day-2 muscle, built in.</p></div>
+  </div>
+
+  <div class="callout"><div class="lbl">Build on what exists — don't reinvent</div>The firm should not reinvent the wheel. <b>Leverage proven open-source frameworks and industry tools</b> (skills, tools, connectors, evals-as-code) — and concentrate the differentiation in the <b>library of firm-specific blocks</b> and the <b>cognitive loop</b> (§7). The two-tier stack that powers these pillars is detailed in §6.</div>
+</section>
+
+
+<!-- ============== 6. RECOMMENDED STACK ============== -->
+<section id="stack">
+  <h2><span class="n">06</span> · Recommended Common Stack &amp; Tooling</h2>
+  <div class="h">How the firm splits its technical capabilities</div>
+
+  <p class="lead">The firm delivers through two complementary paths — <b>meeting customers where they are</b>, while building <b>its own depth and IP</b>. Two ways to deliver, one engineering practice.</p>
+
+  <div class="grid2">
+    <div class="card"><span class="tag">Low-code builders</span><h4>Vendor &amp; low-code platforms</h4><ul>
+      <li>Used when a customer already runs on a vendor platform, has contracts to leverage, or needs fast delivery where the data lives.</li>
+      <li>Lets the firm <b>build on and grow platform partnerships</b> — certifications &amp; partner status that <b>open commercial doors</b>: referrals, co-selling, new accounts.</li>
+      <li>Works within vendor restrictions on the customer's terms.</li>
+      <li>Owned by <b>Applied Delivery Engineers</b>.</li>
+    </ul></div>
+    <div class="card"><span class="tag">Own platform</span><h4>The firm's AI platform</h4><ul>
+      <li>The firm's own <b>modular, self-evolving platform</b> — an orchestrator with reusable tools and a shared framework.</li>
+      <li>For <b>bespoke, production-grade solutions</b> the firm fully owns and controls.</li>
+      <li>The path when the firm needs <b>depth, portability, and IP that compounds</b>.</li>
+      <li>Owned by <b>core AI Engineers</b>.</li>
+    </ul></div>
+  </div>
+
+  <h3>The in-house platform — a suggested reference architecture</h3>
+  <figure>
+    <svg viewBox="0 0 1140 380" width="1130" role="img" aria-label="Code-first reference architecture: frontend, FastAPI backend with the agent, tools/skills/MCPs, cloud models and data, Langfuse and GitHub">
+      <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#908A7C"/></marker></defs>
+      <g font-family="'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif">
+        <rect x="150" y="12" width="980" height="312" rx="14" fill="#FCFBF6" stroke="#908A7C" stroke-dasharray="7 5"/>
+        <text x="1118" y="32" font-size="10" font-weight="700" letter-spacing="1" fill="#908A7C" text-anchor="end">CLOUD · EU REGIONS</text>
+        <ellipse cx="52" cy="150" rx="32" ry="23" fill="#FBE9DF" stroke="#FF5A1F"/>
+        <text x="52" y="154" font-size="12.5" font-weight="700" text-anchor="middle" fill="#17150F">User</text>
+        <line x1="88" y1="142" x2="164" y2="142" stroke="#908A7C" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="164" y1="158" x2="90" y2="158" stroke="#908A7C" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="168" y="118" width="172" height="64" rx="10" fill="#17150F"/>
+        <text x="254" y="145" font-size="12.5" font-weight="700" fill="#fff" text-anchor="middle">Frontend · React (Vite)</text>
+        <text x="254" y="162" font-size="10" fill="#cbd5e1" text-anchor="middle">web UI · AG-UI client</text>
+        <line x1="340" y1="134" x2="478" y2="134" stroke="#908A7C" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="480" y1="166" x2="342" y2="166" stroke="#908A7C" stroke-width="2" marker-end="url(#ar)"/>
+        <rect x="366" y="136" width="88" height="28" rx="14" fill="#FBE9DF" stroke="#FF5A1F" stroke-width="1.6"/>
+        <text x="410" y="155" font-size="12" font-weight="700" fill="#FF5A1F" text-anchor="middle">AG-UI</text>
+        <text x="410" y="186" font-size="9.5" fill="#5C574C" text-anchor="middle">live state ↔ input &amp; approvals</text>
+        <rect x="484" y="40" width="420" height="244" rx="12" fill="#fff" stroke="#5C574C" stroke-width="1.4"/>
+        <text x="694" y="60" font-size="11.5" font-weight="700" fill="#17150F" text-anchor="middle">Backend · FastAPI — managed runtime → containers as it grows</text>
+        <rect x="498" y="76" width="250" height="150" rx="10" fill="#FBE9DF" stroke="#FF5A1F" stroke-width="1.6"/>
+        <text x="512" y="96" font-size="9.5" font-weight="700" letter-spacing="1" fill="#FF5A1F">THE AGENT</text>
+        <rect x="512" y="104" width="222" height="32" rx="7" fill="#FF5A1F"/>
+        <text x="623" y="124" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LangGraph <tspan font-weight="500" font-size="9.5">— runtime · state · checkpoints</tspan></text>
+        <rect x="512" y="142" width="222" height="32" rx="7" fill="#3A362E"/>
+        <text x="623" y="162" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">LangChain <tspan font-weight="500" font-size="9.5">— models · tools · prompts</tspan></text>
+        <text x="623" y="200" font-size="9.5" fill="#5C574C" text-anchor="middle">decides within limits —</text>
+        <text x="623" y="213" font-size="9.5" fill="#5C574C" text-anchor="middle">code controls the flow</text>
+        <text x="827" y="70" font-size="9" font-weight="700" letter-spacing="1" fill="#908A7C" text-anchor="middle">WHAT IT CAN DO</text>
+        <rect x="768" y="78" width="118" height="38" rx="8" fill="#fff" stroke="#D7D0C2"/>
+        <text x="827" y="94" font-size="11" font-weight="700" text-anchor="middle" fill="#17150F">Tools</text>
+        <text x="827" y="108" font-size="8.5" fill="#5C574C" text-anchor="middle">typed, scoped actions</text>
+        <rect x="768" y="126" width="118" height="38" rx="8" fill="#fff" stroke="#D7D0C2"/>
+        <text x="827" y="142" font-size="11" font-weight="700" text-anchor="middle" fill="#17150F">Skills</text>
+        <text x="827" y="156" font-size="8.5" fill="#5C574C" text-anchor="middle">reusable know-how</text>
+        <rect x="768" y="174" width="118" height="38" rx="8" fill="#fff" stroke="#D7D0C2" stroke-dasharray="5 3"/>
+        <text x="827" y="190" font-size="11" font-weight="700" text-anchor="middle" fill="#17150F">MCPs</text>
+        <text x="827" y="204" font-size="8.5" fill="#5C574C" text-anchor="middle">shared tools — as reuse grows</text>
+        <g stroke="#908A7C" stroke-width="1.6" fill="none">
+          <line x1="748" y1="110" x2="764" y2="97" marker-end="url(#ar)"/>
+          <line x1="748" y1="145" x2="764" y2="145" marker-end="url(#ar)"/>
+          <line x1="748" y1="180" x2="764" y2="193" marker-end="url(#ar)"/>
+        </g>
+        <text x="1016" y="50" font-size="9" font-weight="700" letter-spacing="1" fill="#908A7C" text-anchor="middle">MODELS &amp; DATA</text>
+        <rect x="920" y="58" width="192" height="54" rx="9" fill="#FCFBF6" stroke="#D7D0C2"/>
+        <text x="1016" y="80" font-size="12" font-weight="700" text-anchor="middle" fill="#17150F">Model hosting</text>
+        <text x="1016" y="96" font-size="9.5" fill="#5C574C" text-anchor="middle">models &amp; reasoning</text>
+        <rect x="920" y="136" width="192" height="54" rx="9" fill="#FCFBF6" stroke="#D7D0C2"/>
+        <text x="1016" y="158" font-size="12" font-weight="700" text-anchor="middle" fill="#17150F">SQL · NoSQL DB</text>
+        <text x="1016" y="174" font-size="9.5" fill="#5C574C" text-anchor="middle">memory &amp; conversations</text>
+        <rect x="920" y="214" width="192" height="54" rx="9" fill="#FCFBF6" stroke="#D7D0C2"/>
+        <text x="1016" y="236" font-size="12" font-weight="700" text-anchor="middle" fill="#17150F">Vector search ← Object store</text>
+        <text x="1016" y="252" font-size="9.5" fill="#5C574C" text-anchor="middle">knowledge &amp; documents</text>
+        <g stroke="#908A7C" stroke-width="1.6" fill="none">
+          <line x1="906" y1="85" x2="916" y2="85" marker-end="url(#ar)"/>
+          <line x1="906" y1="163" x2="916" y2="163" marker-end="url(#ar)"/>
+          <line x1="906" y1="241" x2="916" y2="241" marker-end="url(#ar)"/>
+        </g>
+        <line x1="694" y1="284" x2="694" y2="292" stroke="#FF5A1F" stroke-width="1.6" stroke-dasharray="3 3"/>
+        <rect x="484" y="294" width="646" height="30" rx="8" fill="#FBE9DF" stroke="#FF5A1F"/>
+        <text x="807" y="313" font-size="11.5" font-weight="700" fill="#FF5A1F" text-anchor="middle">Langfuse — records &amp; evaluates every step: traces · evals · costs · prompts</text>
+        <rect x="16" y="282" width="124" height="46" rx="9" fill="#17150F"/>
+        <text x="78" y="301" font-size="11.5" font-weight="700" fill="#fff" text-anchor="middle">GitHub</text>
+        <text x="78" y="316" font-size="9" fill="#cbd5e1" text-anchor="middle">repo · pipeline</text>
+        <line x1="142" y1="305" x2="162" y2="305" stroke="#908A7C" stroke-width="1.8" marker-end="url(#ar)"/>
+        <text x="172" y="309" font-size="9.5" fill="#5C574C">ships every tagged version</text>
+      </g>
+    </svg>
+    <figcaption>A <b>suggested</b> blueprint, not the only option: a FastAPI backend wraps the agent (LangGraph + LangChain), which calls typed tools, skills and MCPs over cloud models &amp; data — with Langfuse recording &amp; evaluating every step, and GitHub shipping each tagged version. One proven starting point to adapt. <em>(representative reference blueprint)</em></figcaption>
+  </figure>
+
+  <h3>Quality &amp; evals — the one place not to cut corners</h3>
+  <p>Evals are <b>automated quality checks for AI</b> — known-good examples with a clear pass/fail, run on every change so nothing ships that quietly got worse. It's also critical to <b>monitor cost and latency</b>, not just quality.</p>
+  <ul>
+    <li><b>Measure quality, don't assume it.</b> AI fails silently — confident but wrong — so dashboards look normal while the model is wrong <a class="cite" target="_blank" rel="noopener" href="https://tianpan.co/blog/2026-04-19-ai-incident-response-playbook-llm-production">Pan</a>.</li>
+    <li><b>LLMs are black boxes.</b> Observability (tracing) is the only way to see what an agent actually did, and to debug it <a class="cite" target="_blank" rel="noopener" href="https://www.braintrust.dev/articles/best-llm-tracing-tools-2026">Braintrust</a>.</li>
+    <li><b>Feedback interfaces feed monitoring automatically.</b> In-product ratings, thumbs and corrections flow straight into observability — turning real usage into new test cases and feeding the cognitive loop (§7) <a class="cite" target="_blank" rel="noopener" href="https://langfuse.com/blog/2025-03-04-llm-evaluation-101-best-practices-and-challenges">Langfuse</a>.</li>
+    <li><b>Start small, from real failures.</b> A handful of real failure cases beats a giant test suite; grade the <em>outcome</em>, not a rigid step-by-step path <a class="cite" target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Anthropic</a>.</li>
+    <li><b>Let AI help grade — carefully.</b> An AI can judge open-ended answers, but only once it has been checked to agree with a human expert <a class="cite" target="_blank" rel="noopener" href="https://hamel.dev/blog/posts/llm-judge/index.html">Husain</a>.</li>
+  </ul>
+
+</section>
+
+
+<!-- ============== 7. COGNITIVE LOOP ============== -->
+<section id="loop">
+  <h2><span class="n">07</span> · The Cognitive Loop / Consultant Digital Twin</h2>
+  <div class="h">The firm's IP: a digital twin built by consultants themselves</div>
+
+  <p class="lead"><b>The platform unlocks this stage.</b> Once it exists, the firm can close the <b>cognitive loop</b> — turning its human capital (workflows, domain knowledge, continuous-improvement (Lean) discipline, client context, taste) into "token capital" that compounds. This is where the firm gains its <b>real edge, starting from how it operates internally</b>: a <b>consultant digital twin built by the consultants themselves</b> — an evolving, dynamic system. A platform is replicable; this encoded judgement is not.</p>
+
+  <figure>
+    <svg viewBox="0 0 1000 300" width="1000" role="img" aria-label="The learning loop between human capital and token capital">
+      <defs>
+        <marker id="aro" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#FF5A1F"/></marker>
+        <marker id="arg" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#2e7d52"/></marker>
+      </defs>
+      <g font-family="'Space Grotesk',-apple-system,'Segoe UI',Roboto,sans-serif">
+        <!-- HUMAN CAPITAL -->
+        <rect x="20" y="95" width="250" height="150" rx="14" fill="#fde8e8" stroke="#d98a8a" stroke-width="1.6"/>
+        <text x="145" y="126" font-size="13" font-weight="700" letter-spacing="1" fill="#a3433f" text-anchor="middle">🧠 HUMAN CAPITAL</text>
+        <text x="145" y="152" font-size="13" fill="#3A362E" text-anchor="middle">judgement · relationships</text>
+        <text x="145" y="172" font-size="13" fill="#3A362E" text-anchor="middle">ingenuity · pattern recognition</text>
+        <text x="145" y="200" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">sets the goals · connects the dots</text>
+        <text x="145" y="224" font-size="12" font-weight="700" fill="#a3433f" text-anchor="middle">grows MORE valuable, not less</text>
+        <!-- TOKEN CAPITAL -->
+        <rect x="730" y="95" width="250" height="150" rx="14" fill="#FBE9DF" stroke="#FF5A1F" stroke-width="1.8"/>
+        <text x="855" y="126" font-size="13" font-weight="700" letter-spacing="1" fill="#3730A3" text-anchor="middle">⚙️ TOKEN CAPITAL</text>
+        <text x="855" y="152" font-size="13" fill="#3A362E" text-anchor="middle">the AI capability</text>
+        <text x="855" y="172" font-size="13" font-weight="700" fill="#17150F" text-anchor="middle">built &amp; OWNED</text>
+        <text x="855" y="200" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">workflows + judgement, encoded</text>
+        <text x="855" y="224" font-size="12" font-weight="700" fill="#3730A3" text-anchor="middle">improves with every use</text>
+        <!-- top arc: human directs -->
+        <path d="M270,120 C 410,48 590,48 730,120" fill="none" stroke="#FF5A1F" stroke-width="2.6" marker-end="url(#aro)"/>
+        <text x="500" y="38" font-size="12.5" font-weight="700" fill="#3730A3" text-anchor="middle">human agency directs — sets ambitious goals</text>
+        <!-- bottom arc: AI amplifies -->
+        <path d="M730,200 C 590,272 410,272 270,200" fill="none" stroke="#2e7d52" stroke-width="2.6" marker-end="url(#arg)"/>
+        <text x="500" y="291" font-size="12.5" font-weight="700" fill="#2e7d52" text-anchor="middle">AI amplifies — makes expertise scalable &amp; replicable</text>
+        <!-- center badge -->
+        <circle cx="500" cy="160" r="72" fill="#FBE9DF" stroke="#FF5A1F" stroke-width="2"/>
+        <text x="500" y="153" font-size="14.5" font-weight="700" fill="#3730A3" text-anchor="middle">THE LEARNING</text>
+        <text x="500" y="172" font-size="14.5" font-weight="700" fill="#3730A3" text-anchor="middle">LOOP</text>
+        <text x="500" y="192" font-size="11" font-weight="700" fill="#64748b" text-anchor="middle">↗ the firm's IP</text>
+      </g>
+    </svg>
+    <figcaption>The learning loop. <b>Human capital</b> sets the goals and direction; the AI capability the firm owns (<b>token capital</b>) amplifies and scales that expertise — and improves with every use. Unlike a model or tool, this asset is firm-specific and compounds with every project <a class="cite" target="_blank" rel="noopener" href="https://x.com/satyanadella/status/2066182223213293753?s=20">Nadella</a>.</figcaption>
+  </figure>
+
+  <h3>How the loop is operated, concretely</h3>
+  <ul>
+    <li><b>Encode:</b> every consultant's interaction and feedback builds the agents — so each can deploy their own <b>1:1 digital twin</b>, carrying their workflows, judgement and domain know-how.</li>
+    <li><b>Run:</b> those blocks power both internal delivery and client agents.</li>
+    <li><b>Feed back:</b> real traces, corrections and failures flow back into the prompts and evals — the twin sharpens.</li>
+    <li><b>Govern it:</b> the loop only compounds if evals are broad and the firm dogfoods the same thing customers get.</li>
+  </ul>
+</section>
+
+<!-- ============== 8. SERVICE OFFERING ============== -->
+<section id="offering">
+  <h2><span class="n">08</span> · Service Offering &amp; Sales Enablement</h2>
+  <div class="h">Discover the offering by building and using the platform</div>
+
+  <p>Sales talk about AI but don't know what to actually offer. Rather than inventing a fixed catalog up front, the firm lets the offering <b>emerge</b>: as it builds the platform and dogfoods it, the capabilities that prove genuinely valuable become what it sells — <b>discovered through delivery, not guessed</b>.</p>
+  <p>Early signals point toward low-code data agents, bespoke production agents, a Day-2 maintenance service, and sovereign / AI-Act-ready architecture — but these are <b>directions to validate</b>, not a menu to commit to now.</p>
+  <p>It also compounds: <b>each customer implementation unblocks a cluster of adjacent use cases</b> the firm can replicate and offer with little extra effort — every engagement widens both the catalog and the sellable offering.</p>
+
+  <h3>Cost efficiency, not cost reduction</h3>
+  <p>"Cost reduction" reads as headcount cuts and clashes with people-first brand values. <b>Cost efficiency</b> — the same people delivering more, better — is on-brand, aligns with continuous-improvement (Lean/Kaizen) principles, and is what the platform actually enables. This framing should be the standard sales line.</p>
+
+  <h3>Dogfooding as the sales engine</h3>
+  <p class="pull">If the firm can't build something its own teams prefer over off-the-shelf <b>ChatGPT / Claude / Gemini</b>, it cannot credibly sell AI services.</p>
+  <ul>
+    <li>Forces the platform to be <b>genuinely good</b>.</li>
+    <li>Teaches sales the <b>real capabilities from experience</b>, not slideware.</li>
+    <li><b>The flagship internal agent</b> — make it beat off-the-shelf tools for the firm's own work, and sales sell from lived proof.</li>
+  </ul>
+
+  <h3>Enablement — a practical path from awareness to mastery</h3>
+  <p>Skip passive awareness sessions. Follow a <b>practical path — awareness → understanding → mastery</b>, where people learn AI by building with it, not by sitting through slides:</p>
+  <ul>
+    <li><b>Hands-on labs</b> — learn on the platform, not on theory.</li>
+    <li><b>Internal hackathons</b> — feed winning patterns straight into the catalog.</li>
+    <li><b>Solution champions / ambassadors / evangelists</b> — drive peer adoption; Applied Delivery Engineers anchor it.</li>
+    <li><b>Coaching over decks</b> — enough real, hands-on training to turn people into regular users.</li>
+  </ul>
+</section>
+
+<!-- ============== 9. OPERATING MODEL ============== -->
+<section id="operating">
+  <h2><span class="n">09</span> · Operating Model: How the Roles Support Each Other</h2>
+  <div class="h">Roles designed to complement — each frees the next to do its best work</div>
+
+  <h3>The Forward Deployed Engineer profile — why and how</h3>
+  <p>An <b>FDE (Forward Deployed Engineer)</b> is, simply, an engineer who <b>embeds directly with a customer</b> to build and ship their solution on the ground — the model OpenAI and Anthropic now use to deliver AI on customer infrastructure.</p>
+  <p>For such a firm, this lower-tech FDE owns low-code, hands-on client delivery and the <b>customer relationship</b> — unblocking delivery capacity while <b>keeping its core AI engineers on frontier work</b>. A clear career ladder, not a low-code dead-end:</p>
+  <figure>
+    <svg viewBox="0 0 820 220" width="820" role="img" aria-label="Career ladder: Applied Delivery Engineer to Core AI Engineer to Platform Lead">
+      <style>.lt2{font:600 13px var(--font,sans-serif);fill:#17150F}.ls2{font:400 10.5px var(--font,sans-serif);fill:#5C574C}.lk{font:600 10px var(--font,sans-serif);fill:#908A7C;letter-spacing:1px}</style>
+      <rect x="20" y="60" width="230" height="100" rx="12" fill="#FBE9DF" stroke="#FF5A1F" stroke-width="1.5"/>
+      <text x="40" y="88" class="lt2">Forward Deployed Engineer</text><text x="40" y="106" class="ls2">embedded low-code client delivery,</text><text x="40" y="120" class="ls2">owns the customer relationship</text><text x="40" y="140" class="ls2" style="fill:#FF5A1F;font-weight:600">on-ramp · protects senior talent</text>
+      <path d="M250 110 L 300 110" stroke="#17150F" stroke-width="2" marker-end="url(#la)"/>
+      <defs><marker id="la" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#17150F"/></marker></defs>
+      <rect x="300" y="60" width="230" height="100" rx="12" fill="#fff" stroke="#17150F" stroke-width="1.4"/>
+      <text x="320" y="88" class="lt2">Core AI Engineer</text><text x="320" y="106" class="ls2">bespoke Tier-2 production agents,</text><text x="320" y="120" class="ls2">hardest blocks, eval rigor</text><text x="320" y="140" class="ls2" style="font-weight:600">stays on the frontier</text>
+      <path d="M530 110 L 580 110" stroke="#17150F" stroke-width="2" marker-end="url(#la)"/>
+      <rect x="580" y="60" width="220" height="100" rx="12" fill="#17150F"/>
+      <text x="600" y="88" class="lt2" style="fill:#fff">Platform Lead</text><text x="600" y="106" class="ls2" style="fill:#cbd5e1">owns the standard, catalog,</text><text x="600" y="120" class="ls2" style="fill:#cbd5e1">paved road &amp; shared spine</text><text x="600" y="140" class="ls2" style="fill:#FF5A1F;font-weight:600">leadership pipeline</text>
+      <text x="20" y="40" class="lk">A CLEAR LADDER — NOT A LOW-CODE DEAD-END</text>
+    </svg>
+    <figcaption>The FDE tier gives juniors a fast on-ramp and a leadership pipeline, while keeping senior engineers on frontier work. Recommended ~1:1–1:2 FDE-to-core ratio; treat the embedded seat as a tour, not a forever seat, to manage burnout.</figcaption>
+  </figure>
+
+  <h3>A probable addition — Prompt Engineer</h3>
+  <p>A likely future role: a <b>Prompt Engineer</b> who can <b>spin up quick POCs and handle day-to-day maintenance</b> — tuning prompts, evals and context. Lower barrier to enter, high-leverage for fast validation and upkeep, and it frees both FDEs and core engineers from routine work.</p>
+</section>
+
+<!-- ============== 10. EU SOVEREIGNTY ============== -->
+<section id="sovereignty">
+  <h2><span class="n">10</span> · EU Compliance &amp; AI Sovereignty as a Differentiator</h2>
+  <div class="h">Sovereign by design — an edge over giants and vendor-locked consultants</div>
+
+  <p class="lead">Build the platform <b>sovereign by design</b> — able to run independently of the providers that feed it — and the firm gets two things at once: it <b>eliminates the risks recent events have exposed</b>, and it <b>opens commercial doors</b> that vendor-locked competitors can't.</p>
+
+  <h3>Why — what recent events proved</h3>
+  <ul>
+    <li>In June 2026, the US government ordered Anthropic to <b>cut off all foreign access to its top models (Fable 5 / Mythos 5)</b> — taking them offline worldwide overnight. Even the most advanced AI can be switched off by a single government order <a class="cite" target="_blank" rel="noopener" href="https://time.com/article/2026/06/13/anthropic-fable-mythos-ban-US-security/">Time</a>.</li>
+    <li>Under oath, Microsoft France <b>could not guarantee</b> EU data would never be handed to US authorities; the <b>US CLOUD Act</b> compels US providers to disclose data wherever it's stored <a class="cite" target="_blank" rel="noopener" href="https://www.theregister.com/2025/07/25/microsoft_admits_it_cannot_guarantee">Register</a> <a class="cite" target="_blank" rel="noopener" href="https://www.kiteworks.com/gdpr-compliance/eu-data-act-gdpr-cloud-conflict/">CLOUD Act</a>.</li>
+    <li>The ICC was pushed off Microsoft Office onto open-source tools — "digital sovereignty" is now a board-level topic across Europe <a class="cite" target="_blank" rel="noopener" href="https://www.heise.de/en/news/Criminal-Court-Microsoft-s-email-block-a-wake-up-call-for-digital-sovereignty-10387383.html">heise</a>.</li>
+    <li>Demand is real: Gartner sees sovereign-cloud spend up <b>~83% YoY in Europe</b> <a class="cite" target="_blank" rel="noopener" href="https://www.gartner.com/en/newsroom/press-releases/2026-02-09-gartner-says-worldwide-sovereign-cloud-iaas-spending-will-total-us-dollars-80-billion-in-2026">Gartner</a>.</li>
+  </ul>
+
+  <h3>Sovereign by design — the payoff</h3>
+  <div class="grid2">
+    <div class="card"><span class="tag">Eliminates risk</span><h4>No single point of failure</h4><p>A platform that can <b>swap models, clouds and providers</b> — and self-host the critical path — has no single point of geopolitical or vendor failure. EU-resident and AI-Act-logged by default.</p></div>
+    <div class="card"><span class="tag">Opens doors</span><h4>Provider-independent delivery</h4><p>Because it runs <b>independent of any one provider</b>, the firm can win <b>regulated, public-adjacent and select international accounts</b> that vendor-locked competitors can't serve — and offer <b>compliance as a deliverable</b>.</p></div>
+  </div>
+
+  <div class="callout"><div class="lbl">Beyond compliance — an opportunity</div>The firm can go further than the minimum: <b>certify the platform as AI-Act-ready / sovereign</b>, turning a legal obligation into a <b>competitive advantage</b> and a sellable badge clients can trust.</div>
+
+  <p style="font-size:13.5px;color:var(--slate)"><b>Honest caveat:</b> the EU lags on raw AI compute, so the firm differentiates on <em>trust, jurisdiction and agility</em>, not raw capability — don't oversell it <a class="cite" target="_blank" rel="noopener" href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/accelerating-europes-ai-adoption-the-role-of-sovereign-ai">McKinsey</a>.</p>
+</section>
+
+<!-- ============== 11. APPENDIX & REFERENCES ============== -->
+<section id="appendix">
+  <h2><span class="n">11</span> · Appendix: References</h2>
+  <div class="h">The evidence base</div>
+
+  <div class="refs">
+    <p style="color:var(--muted);font-size:12px"><em>Internal sources:</em> the firm's internal strategy artifacts (engineering standards, prior platform plan, annual business strategy, brand guidelines). <em>External sources, grounding the recommendation (selected):</em></p>
+    <ol>
+      <li>Anthropic — Building agents with the Claude Agent SDK. <a target="_blank" rel="noopener" href="https://claude.com/blog/building-agents-with-the-claude-agent-sdk">claude.com</a></li>
+      <li>Anthropic — Building Effective Agents. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/building-effective-agents">anthropic.com</a></li>
+      <li>Anthropic — Demystifying evals for AI agents. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">anthropic.com</a></li>
+      <li>Anthropic — April 2026 dogfooding post-mortem. <a target="_blank" rel="noopener" href="https://www.anthropic.com/engineering/april-23-postmortem">anthropic.com</a></li>
+      <li>Model Context Protocol — architecture &amp; registry. <a target="_blank" rel="noopener" href="https://modelcontextprotocol.io/specification/2025-06-18/architecture">modelcontextprotocol.io</a></li>
+      <li>anthropics/skills monorepo. <a target="_blank" rel="noopener" href="https://github.com/anthropics/skills">github.com</a></li>
+      <li>OpenAI Agents SDK. <a target="_blank" rel="noopener" href="https://openai.github.io/openai-agents-python/">openai.github.io</a></li>
+      <li>LangChain/LangGraph 1.0. <a target="_blank" rel="noopener" href="https://www.langchain.com/blog/langchain-langgraph-1dot0">langchain.com</a> · <a target="_blank" rel="noopener" href="https://www.langchain.com/langgraph">LangGraph</a></li>
+      <li>12-Factor Agents (HumanLayer). <a target="_blank" rel="noopener" href="https://github.com/humanlayer/12-factor-agents">github.com</a></li>
+      <li>Backstage software templates. <a target="_blank" rel="noopener" href="https://backstage.io/docs/features/software-templates/">backstage.io</a> · Spotify Golden Paths. <a target="_blank" rel="noopener" href="https://engineering.atspotify.com/2020/08/how-we-use-golden-paths-to-solve-fragmentation-in-our-software-ecosystem">atspotify.com</a></li>
+      <li>AWS Agent Registry (preview). <a target="_blank" rel="noopener" href="https://aws.amazon.com/blogs/machine-learning/the-future-of-managing-agents-at-scale-aws-agent-registry-now-in-preview/">aws.amazon.com</a></li>
+      <li>Nx mental model. <a target="_blank" rel="noopener" href="https://nx.dev/docs/concepts/mental-model">nx.dev</a> · uv workspaces. <a target="_blank" rel="noopener" href="https://docs.astral.sh/uv/concepts/projects/workspaces/">astral.sh</a></li>
+      <li>Snowflake Cortex Agents. <a target="_blank" rel="noopener" href="https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents">docs.snowflake.com</a> · Dataiku Agent Hub. <a target="_blank" rel="noopener" href="https://www.dataiku.com/stories/blog/introducing-agent-hub">dataiku.com</a></li>
+      <li>LiteLLM. <a target="_blank" rel="noopener" href="https://github.com/BerriAI/litellm">github.com</a> · Promptfoo. <a target="_blank" rel="noopener" href="https://github.com/promptfoo/promptfoo">github.com</a></li>
+      <li>Hamel Husain — LLM-as-judge. <a target="_blank" rel="noopener" href="https://hamel.dev/blog/posts/llm-judge/index.html">hamel.dev</a></li>
+      <li>Best LLM tracing tools 2026 (Braintrust). <a target="_blank" rel="noopener" href="https://www.braintrust.dev/articles/best-llm-tracing-tools-2026">braintrust.dev</a> · LLM incident playbook. <a target="_blank" rel="noopener" href="https://tianpan.co/blog/2026-04-19-ai-incident-response-playbook-llm-production">tianpan.co</a></li>
+      <li>Palantir FDE. <a target="_blank" rel="noopener" href="https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1">palantir.com</a> · Pragmatic Engineer on FDEs. <a target="_blank" rel="noopener" href="https://newsletter.pragmaticengineer.com/p/forward-deployed-engineers">pragmaticengineer.com</a> · a16z. <a target="_blank" rel="noopener" href="https://a16z.com/services-led-growth/">a16z.com</a></li>
+      <li>Team Topologies. <a target="_blank" rel="noopener" href="https://teamtopologies.com/key-concepts-content/what-are-the-core-team-types-in-team-topologies">teamtopologies.com</a> · 2025 DORA report. <a target="_blank" rel="noopener" href="https://cloud.google.com/blog/products/ai-machine-learning/announcing-the-2025-dora-report">cloud.google.com</a></li>
+      <li>EU AI Act — Art. 26. <a target="_blank" rel="noopener" href="https://artificialintelligenceact.eu/article/26/">artificialintelligenceact.eu</a> · Digital Omnibus (Gibson Dunn). <a target="_blank" rel="noopener" href="https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/">gibsondunn.com</a></li>
+      <li>Microsoft cannot guarantee data (Register). <a target="_blank" rel="noopener" href="https://www.theregister.com/2025/07/25/microsoft_admits_it_cannot_guarantee">theregister.com</a> · CLOUD Act vs EU Data Act. <a target="_blank" rel="noopener" href="https://www.kiteworks.com/gdpr-compliance/eu-data-act-gdpr-cloud-conflict/">kiteworks.com</a></li>
+      <li>CJEU — automated decisions &amp; explainability. <a target="_blank" rel="noopener" href="https://www.insideprivacy.com/gdpr/cjeu-clarifies-gdpr-rights-on-automated-decision-making-and-trade-secrets/">insideprivacy.com</a> · EDPB AI privacy risks. <a target="_blank" rel="noopener" href="https://www.edpb.europa.eu/our-work-tools/our-documents/support-pool-experts-projects/ai-privacy-risks-mitigations-large_en">edpb.europa.eu</a></li>
+      <li>Gartner sovereign-cloud forecast. <a target="_blank" rel="noopener" href="https://www.gartner.com/en/newsroom/press-releases/2026-02-09-gartner-says-worldwide-sovereign-cloud-iaas-spending-will-total-us-dollars-80-billion-in-2026">gartner.com</a> · McKinsey sovereign AI. <a target="_blank" rel="noopener" href="https://www.mckinsey.com/industries/technology-media-and-telecommunications/our-insights/accelerating-europes-ai-adoption-the-role-of-sovereign-ai">mckinsey.com</a></li>
+      <li>McKinsey Lilli. <a target="_blank" rel="noopener" href="https://www.mckinsey.com/about-us/new-at-mckinsey-blog/meet-lilli-our-generative-ai-tool">mckinsey.com</a> · Zapier AI rollout. <a target="_blank" rel="noopener" href="https://zapier.com/blog/how-zapier-rolled-out-ai/">zapier.com</a> · BCG AI at Work 2025. <a target="_blank" rel="noopener" href="https://www.bcg.com/publications/2025/ai-at-work-momentum-builds-but-gaps-remain">bcg.com</a></li>
+      <li>US bars foreign access to Claude Fable 5 / Mythos 5 (Time, Jun 2026). <a target="_blank" rel="noopener" href="https://time.com/article/2026/06/13/anthropic-fable-mythos-ban-US-security/">time.com</a></li>
+      <li>The AI productivity trap — why best engineers get slower (CIO). <a target="_blank" rel="noopener" href="https://www.cio.com/article/4124515/the-ai-productivity-trap-why-your-best-engineers-are-getting-slower.html">cio.com</a></li>
+      <li>Langfuse — LLM evaluation 101. <a target="_blank" rel="noopener" href="https://langfuse.com/blog/2025-03-04-llm-evaluation-101-best-practices-and-challenges">langfuse.com</a></li>
+      <li>Satya Nadella on the human↔AI learning loop (X). <a target="_blank" rel="noopener" href="https://x.com/satyanadella/status/2066182223213293753?s=20">x.com</a></li>
+    </ol>
+  </div>
+  <p style="font-size:12.5px;color:var(--muted)">Claims marked <em>(directional)</em>, <em>(provisional)</em>, <em>(heuristic)</em> or <em>(forward-looking)</em> rest on single or fast-moving sources — verify before client use. Proposed KPIs (reuse rate, time-to-first-agent) are firm-specific, not industry-standard terms.</p>
+</section>
+
+<footer class="docfoot">
+  <b>Building an AI Engineering Practice — A Reference Strategy</b> · generalized, anonymized &amp; shareable.<br>
+  A reference AI-engineering strategy brief for boutique &amp; mid-size AI consultancies. Current state, recommendation, and plan are kept distinct throughout; external claims are sourced inline and in §12. All firm-specific names, products, people &amp; figures have been removed. Proof&nbsp;&gt;&nbsp;promises.
+</footer>
