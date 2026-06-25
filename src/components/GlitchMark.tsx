@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  * shapes and bursts into an RGB-split / scanline glitch. Ported from the
  * Portfolio design's `startGlitch` routine and driven by requestAnimationFrame.
  */
-export default function GlitchMark() {
+export default function GlitchMark({ size = 300 }: { size?: number }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function GlitchMark() {
     let started = false;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const S = 300;
+    const S = size;
     c.width = S * dpr;
     c.height = S * dpr;
     c.style.width = S + "px";
@@ -217,7 +217,7 @@ export default function GlitchMark() {
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [size]);
 
   return <canvas ref={canvasRef} style={{ position: "relative", zIndex: 1 }} />;
 }

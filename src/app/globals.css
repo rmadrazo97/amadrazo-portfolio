@@ -164,3 +164,80 @@ a {
 .channel:hover {
   background: #2a2016 !important;
 }
+
+/* ---------------------------------------------------------------------------
+   Blog + shared chrome responsive layout.
+   Desktop defaults below replicate the original inline styles exactly, so
+   desktop output is unchanged; all narrow-screen overrides live inside the
+   @media block. Every selector is scoped to a blog/chrome-only class so the
+   homepage (which shares this stylesheet) is never affected.
+   --------------------------------------------------------------------------- */
+
+/* Shared footer inner container (SiteShell) */
+.site-footer {
+  padding: 22px 40px;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Blog index (blog/page.tsx) */
+.blog-main {
+  padding: 70px 40px 90px;
+}
+.blog-card {
+  padding: 28px 30px;
+}
+.blog-card-title {
+  font-size: 24px;
+}
+
+/* Blog post (blog/[slug]/page.tsx) */
+.post-main {
+  padding: 34px 24px 90px;
+}
+
+/* Keep injected post HTML from overflowing on small screens */
+.postdoc img,
+.postdoc video,
+.postdoc svg,
+.postdoc iframe {
+  max-width: 100%;
+  height: auto;
+}
+.postdoc pre,
+.postdoc table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+.postdoc {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding: 18px 20px;
+  }
+  .blog-main {
+    padding: 48px 20px 64px;
+  }
+  .blog-card {
+    padding: 22px 18px;
+  }
+  .blog-card-title {
+    font-size: 20px;
+  }
+  .post-main {
+    padding: 28px 16px 64px;
+  }
+  /* Keep the post bottom-row "More writing" link a comfortable tap target */
+  .post-foot-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  /* The post sets its own inline font-sizes; the cover H1 (40px) is the only
+     one large enough to risk overflow at 320px — nudge it down. */
+  .postdoc .cover h1 {
+    font-size: 30px !important;
+  }
+}

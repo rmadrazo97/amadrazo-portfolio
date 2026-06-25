@@ -3,6 +3,8 @@
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
 import GlitchMark from "../components/GlitchMark";
+import SiteNav from "../components/SiteNav";
+import { useViewport } from "../components/useViewport";
 import { posts, formatDate } from "../posts/meta";
 
 const MONO = "'JetBrains Mono', monospace";
@@ -512,6 +514,17 @@ const h2Style = {
 export default function Home() {
   const [scr, setScr] = useState("");
   const [selIdx, setSelIdx] = useState<number | null>(null);
+  const { width, isMobile, isTablet } = useViewport();
+
+  // Shared responsive helpers. Desktop (>1024) must stay byte-for-byte; every
+  // value below collapses to the original when neither isMobile nor isTablet.
+  const isSmall = width <= 360; // very narrow phones (<=360)
+  // standard vertical section rhythm (74px 40px on desktop)
+  const sectionPad = isMobile
+    ? "52px 20px"
+    : isTablet
+      ? "60px 28px"
+      : "74px 40px";
 
   // hero scramble / reveal ticker
   useEffect(() => {
@@ -583,92 +596,7 @@ export default function Home() {
       />
 
       {/* NAV */}
-      <nav
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 20,
-          backdropFilter: "blur(8px)",
-          background: "rgba(239,235,226,0.82)",
-          borderBottom: "1px solid #D7D0C2",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 1180,
-            margin: "0 auto",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "14px 40px",
-            fontFamily: MONO,
-            fontSize: 12,
-            letterSpacing: "0.04em",
-          }}
-        >
-          <a
-            href="#top"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 11,
-              fontWeight: 700,
-              textTransform: "uppercase",
-              color: "#17150F",
-            }}
-          >
-            <span
-              style={{
-                width: 11,
-                height: 11,
-                background: "#FF5A1F",
-                borderRadius: "50%",
-                display: "inline-block",
-              }}
-            />
-            Alex Madrazo
-            <span style={{ color: "#A39C8C", fontWeight: 500 }}> /</span>
-          </a>
-          <div
-            style={{
-              display: "flex",
-              gap: 30,
-              textTransform: "uppercase",
-              color: "#5C574C",
-            }}
-          >
-            <a href="#services" className="nav-link">
-              Capabilities
-            </a>
-            <a href="#work" className="nav-link">
-              Work
-            </a>
-            <a href="#timeline" className="nav-link">
-              Trajectory
-            </a>
-            <a href="#stack" className="nav-link">
-              Stack
-            </a>
-            <a href="/blog" className="nav-link">
-              Writing
-            </a>
-          </div>
-          <a
-            href="#contact"
-            className="nav-cta"
-            style={{
-              background: "#17150F",
-              color: "#EFEBE2",
-              padding: "9px 16px",
-              borderRadius: 7,
-              fontWeight: 600,
-              textTransform: "uppercase",
-            }}
-          >
-            Get in touch →
-          </a>
-        </div>
-      </nav>
+      <SiteNav onHome />
 
       {/* HERO */}
       <header
@@ -678,14 +606,18 @@ export default function Home() {
           zIndex: 2,
           maxWidth: 1180,
           margin: "0 auto",
-          padding: "70px 40px 80px",
+          padding: isMobile
+            ? "44px 20px 52px"
+            : isTablet
+              ? "56px 28px 64px"
+              : "70px 40px 80px",
         }}
       >
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "1.08fr 0.92fr",
-            gap: 40,
+            gridTemplateColumns: isMobile || isTablet ? "1fr" : "1.08fr 0.92fr",
+            gap: isMobile ? 28 : 40,
             alignItems: "center",
           }}
         >
@@ -836,7 +768,13 @@ export default function Home() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              minHeight: 380,
+              minHeight: isMobile ? 300 : 380,
+              transform: isMobile
+                ? isSmall
+                  ? "scale(0.8)"
+                  : "scale(0.9)"
+                : undefined,
+              transformOrigin: "center",
             }}
           >
             <span
@@ -892,38 +830,42 @@ export default function Home() {
                 borderRadius: "50%",
               }}
             />
-            <GlitchMark />
-            <div
-              style={{
-                position: "absolute",
-                top: 14,
-                right: 8,
-                fontFamily: MONO,
-                fontSize: 10,
-                lineHeight: 1.9,
-                color: "#5C574C",
-                textAlign: "left",
-              }}
-            >
-              <div style={{ color: "#A39C8C" }}>▌STATE</div>
-              <div>EVOLVING</div>
-              <div style={{ color: "#A39C8C", marginTop: 8 }}>▌SIGNAL</div>
-              <div style={{ color: "#FF5A1F" }}>UNSTABLE</div>
-            </div>
-            <div
-              style={{
-                position: "absolute",
-                bottom: 14,
-                left: 8,
-                fontFamily: MONO,
-                fontSize: 10,
-                lineHeight: 1.9,
-                color: "#5C574C",
-              }}
-            >
-              <div style={{ color: "#A39C8C" }}>▌NODE</div>
-              <div>AM // MADRID</div>
-            </div>
+            <GlitchMark size={isMobile ? 240 : 300} />
+            {!isSmall && (
+              <>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 14,
+                    right: 8,
+                    fontFamily: MONO,
+                    fontSize: 10,
+                    lineHeight: 1.9,
+                    color: "#5C574C",
+                    textAlign: "left",
+                  }}
+                >
+                  <div style={{ color: "#A39C8C" }}>▌STATE</div>
+                  <div>EVOLVING</div>
+                  <div style={{ color: "#A39C8C", marginTop: 8 }}>▌SIGNAL</div>
+                  <div style={{ color: "#FF5A1F" }}>UNSTABLE</div>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    bottom: 14,
+                    left: 8,
+                    fontFamily: MONO,
+                    fontSize: 10,
+                    lineHeight: 1.9,
+                    color: "#5C574C",
+                  }}
+                >
+                  <div style={{ color: "#A39C8C" }}>▌NODE</div>
+                  <div>AM // MADRID</div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -938,7 +880,7 @@ export default function Home() {
           background: "rgba(252,251,246,0.45)",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
           <div
             style={{
               display: "flex",
@@ -971,7 +913,11 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(3,1fr)",
+              gridTemplateColumns: isMobile
+                ? "1fr"
+                : isTablet
+                  ? "repeat(2,1fr)"
+                  : "repeat(3,1fr)",
               gap: 18,
             }}
           >
@@ -1065,7 +1011,7 @@ export default function Home() {
           borderTop: "1px solid #D7D0C2",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
           <div
             style={{
               display: "flex",
@@ -1098,9 +1044,9 @@ export default function Home() {
           <div
             className="work-scroll"
             style={{
-              maxHeight: 660,
-              overflowY: "auto",
-              paddingRight: 10,
+              maxHeight: isMobile ? "none" : 660,
+              overflowY: isMobile ? "visible" : "auto",
+              paddingRight: isMobile ? 0 : 10,
               display: "flex",
               flexDirection: "column",
               gap: 16,
@@ -1117,12 +1063,13 @@ export default function Home() {
                   borderRadius: 16,
                   overflow: "hidden",
                   display: "grid",
-                  gridTemplateColumns: "1fr 300px",
+                  gridTemplateColumns:
+                    isMobile || isTablet ? "1fr" : "1fr 300px",
                 }}
               >
                 <div
                   style={{
-                    padding: "24px 26px",
+                    padding: isMobile ? "20px 18px" : "24px 26px",
                     display: "flex",
                     flexDirection: "column",
                     gap: 13,
@@ -1241,7 +1188,9 @@ export default function Home() {
                 <div
                   style={{
                     position: "relative",
-                    borderLeft: "1px solid #E3DDD0",
+                    ...(isMobile || isTablet
+                      ? { borderTop: "1px solid #E3DDD0", height: 200 }
+                      : { borderLeft: "1px solid #E3DDD0" }),
                     background: "#F3EFE6",
                     backgroundImage:
                       "radial-gradient(#D7D0C2 1px, transparent 1px)",
@@ -1346,7 +1295,7 @@ export default function Home() {
           background: "rgba(252,251,246,0.45)",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
           <div style={{ marginBottom: 42 }}>
             <div style={sectionLabel}>// 03 — TRAJECTORY</div>
             <h2 style={h2Style}>The path so far</h2>
@@ -1371,31 +1320,38 @@ export default function Home() {
 
           {/* axis */}
           <div style={{ position: "relative", margin: "0 0 30px" }}>
-            <div
-              style={{
-                position: "absolute",
-                top: 11,
-                left: 0,
-                right: 0,
-                height: 2,
-                background: "#D7D0C2",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                top: 11,
-                left: 0,
-                height: 2,
-                background: "#FF5A1F",
-                width: progressW,
-                transition: "width 0.35s ease",
-              }}
-            />
+            {/* horizontal progress line — desktop/tablet only */}
+            {!isMobile && (
+              <>
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 11,
+                    left: 0,
+                    right: 0,
+                    height: 2,
+                    background: "#D7D0C2",
+                  }}
+                />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 11,
+                    left: 0,
+                    height: 2,
+                    background: "#FF5A1F",
+                    width: progressW,
+                    transition: "width 0.35s ease",
+                  }}
+                />
+              </>
+            )}
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-between",
+                flexDirection: isMobile ? "column" : "row",
+                justifyContent: isMobile ? "flex-start" : "space-between",
+                gap: isMobile ? 6 : undefined,
                 position: "relative",
               }}
             >
@@ -1406,21 +1362,27 @@ export default function Home() {
                     key={i}
                     onClick={() => setSelIdx(i)}
                     style={{
-                      background: "none",
-                      border: "none",
+                      background: active && isMobile ? "#FCFBF6" : "none",
+                      border: isMobile
+                        ? `1px solid ${active ? "#FF5A1F" : "#D7D0C2"}`
+                        : "none",
+                      borderRadius: isMobile ? 12 : 0,
                       cursor: "pointer",
-                      padding: 0,
+                      padding: isMobile ? "12px 14px" : 0,
+                      width: isMobile ? "100%" : undefined,
+                      minHeight: isMobile ? 44 : undefined,
                       display: "flex",
-                      flexDirection: "column",
-                      alignItems: "flex-start",
-                      gap: 12,
-                      flex: 1,
+                      flexDirection: isMobile ? "row" : "column",
+                      alignItems: "center",
+                      gap: isMobile ? 14 : 12,
+                      flex: isMobile ? undefined : 1,
                     }}
                   >
                     <span
                       style={{
                         width: 24,
                         height: 24,
+                        flexShrink: 0,
                         borderRadius: "50%",
                         border: `2px solid ${active ? "#FF5A1F" : "#C7C0B0"}`,
                         background: active ? "#FF5A1F" : "#EFEBE2",
@@ -1438,7 +1400,16 @@ export default function Home() {
                         }}
                       />
                     </span>
-                    <span style={{ textAlign: "left" }}>
+                    <span
+                      style={{
+                        textAlign: "left",
+                        display: isMobile ? "flex" : "block",
+                        flexDirection: isMobile ? "row" : undefined,
+                        alignItems: isMobile ? "baseline" : undefined,
+                        gap: isMobile ? 10 : undefined,
+                        flexWrap: isMobile ? "wrap" : undefined,
+                      }}
+                    >
                       <span
                         style={{
                           display: "block",
@@ -1456,7 +1427,7 @@ export default function Home() {
                           fontFamily: MONO,
                           fontSize: 11,
                           color: "#908A7C",
-                          marginTop: 3,
+                          marginTop: isMobile ? 0 : 3,
                         }}
                       >
                         {rl.org}
@@ -1474,7 +1445,7 @@ export default function Home() {
               background: "#1A1813",
               border: "1px solid #2E2A22",
               borderRadius: 16,
-              padding: "34px 34px 32px",
+              padding: isMobile ? "22px 18px" : "34px 34px 32px",
               color: "#EFEBE2",
             }}
           >
@@ -1554,8 +1525,8 @@ export default function Home() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "1fr 1fr",
-                gap: "14px 34px",
+                gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+                gap: isMobile ? "14px" : "14px 34px",
                 marginBottom: 24,
               }}
             >
@@ -1687,7 +1658,7 @@ export default function Home() {
             style={{
               marginTop: 24,
               display: "grid",
-              gridTemplateColumns: "repeat(3,1fr)",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(3,1fr)",
               gap: 14,
             }}
           >
@@ -1748,7 +1719,15 @@ export default function Home() {
         }}
       >
         <div
-          style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px 40px" }}
+          style={{
+            maxWidth: 1180,
+            margin: "0 auto",
+            padding: isMobile
+              ? "52px 20px 40px"
+              : isTablet
+                ? "60px 28px 40px"
+                : "74px 40px 40px",
+          }}
         >
           <div style={{ marginBottom: 38 }}>
             <div style={sectionLabel}>// 04 — STACK</div>
@@ -1771,7 +1750,7 @@ export default function Home() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(2,1fr)",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)",
               gap: 16,
             }}
           >
@@ -1910,7 +1889,7 @@ export default function Home() {
           borderTop: "1px solid #D7D0C2",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "74px 40px" }}>
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
           <div
             style={{
               display: "flex",
@@ -2015,7 +1994,17 @@ export default function Home() {
           background: "rgba(252,251,246,0.45)",
         }}
       >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: "80px 40px" }}>
+        <div
+          style={{
+            maxWidth: 1180,
+            margin: "0 auto",
+            padding: isMobile
+              ? "52px 20px"
+              : isTablet
+                ? "60px 28px"
+                : "80px 40px",
+          }}
+        >
           <div style={{ ...sectionLabel, marginBottom: 18 }}>
             // 06 — CONTACT
           </div>
@@ -2114,7 +2103,12 @@ export default function Home() {
                 available
               </span>
             </div>
-            <div style={{ padding: "26px 26px 30px", fontFamily: MONO }}>
+            <div
+              style={{
+                padding: isMobile ? "20px 16px 24px" : "26px 26px 30px",
+                fontFamily: MONO,
+              }}
+            >
               <div style={{ fontSize: 13, color: "#7A7565", marginBottom: 8 }}>
                 <span style={{ color: "#FF5A1F" }}>$</span> am --connect{" "}
                 <span style={{ color: "#908A7C" }}>--all</span>
@@ -2134,7 +2128,9 @@ export default function Home() {
               <div
                 style={{
                   display: "grid",
-                  gridTemplateColumns: "repeat(auto-fit,minmax(225px,1fr))",
+                  gridTemplateColumns: isMobile
+                    ? "1fr"
+                    : "repeat(auto-fit,minmax(225px,1fr))",
                   gap: 12,
                 }}
               >
@@ -2244,7 +2240,7 @@ export default function Home() {
           style={{
             maxWidth: 1180,
             margin: "0 auto",
-            padding: "22px 40px",
+            padding: isMobile ? "20px" : "22px 40px",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",

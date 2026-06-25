@@ -18,12 +18,12 @@ export default function BlogIndex() {
   return (
     <SiteShell active="writing">
       <main
+        className="blog-main"
         style={{
           position: "relative",
           zIndex: 2,
           maxWidth: 1000,
           margin: "0 auto",
-          padding: "70px 40px 90px",
         }}
       >
         <div
@@ -74,13 +74,12 @@ export default function BlogIndex() {
             <Link
               key={p.slug}
               href={`/blog/${p.slug}`}
-              className="card-hover"
+              className="card-hover blog-card"
               style={{
                 display: "block",
                 background: "#FCFBF6",
                 border: "1px solid #D7D0C2",
                 borderRadius: 16,
-                padding: "28px 30px",
               }}
             >
               <div
@@ -99,9 +98,9 @@ export default function BlogIndex() {
                 <span style={{ color: "#FF5A1F" }}>{p.readingTime}</span>
               </div>
               <h2
+                className="blog-card-title"
                 style={{
                   fontFamily: MONO,
-                  fontSize: 24,
                   fontWeight: 700,
                   letterSpacing: "-0.01em",
                   margin: "0 0 12px",

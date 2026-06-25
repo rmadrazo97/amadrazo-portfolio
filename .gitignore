@@ -36,6 +36,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# firebase (deploy cache / runtime config — keep .firebaserc + firebase.json)
+.firebase/
+*.log
+firebase-debug.log*
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

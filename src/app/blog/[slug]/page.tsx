@@ -47,12 +47,12 @@ export default async function PostPage({
   return (
     <SiteShell active="writing">
       <main
+        className="post-main"
         style={{
           position: "relative",
           zIndex: 2,
           maxWidth: 960,
           margin: "0 auto",
-          padding: "34px 24px 90px",
         }}
       >
         <div
@@ -96,7 +96,7 @@ export default async function PostPage({
         >
           <Link
             href="/blog"
-            className="nav-link"
+            className="nav-link post-foot-link"
             style={{
               fontFamily: MONO,
               fontSize: 13,
