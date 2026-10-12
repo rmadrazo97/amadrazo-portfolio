@@ -2,8 +2,10 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from "react";
-import GlitchMark from "../components/GlitchMark";
+import FeltOrb from "../components/FeltOrb";
+import SheetFrame from "../components/SheetFrame";
 import SiteNav from "../components/SiteNav";
+import PlanSequence from "../components/StudioPlan";
 import { useViewport } from "../components/useViewport";
 import { posts, formatDate } from "../posts/meta";
 
@@ -52,7 +54,7 @@ type Role = {
 };
 
 type Education = { year: string; title: string; org: string };
-type StackGroup = { span: string; cat: string; items: string[] };
+type StackGroup = { cat: string; items: string[] };
 type Channel = { label: string; value: string; icon: string; url: string };
 
 const services: Service[] = [
@@ -113,9 +115,9 @@ const projects: Project[] = [
     period: "2025—present",
     title: "AI & Engineering Studio",
     blurb:
-      "I lead the studio that puts agentic systems into the daily operations of European companies. The firm's public stories — planners, supplier search, governed data — are HazelHeartwood's. This is the practice I run from Madrid: mock-up, production, handover.",
-    metric: "EU",
-    metricLabel: "daily operations, not demos",
+      "I lead the studio that puts agentic systems into daily operations. The firm's public stories — planners, supplier search, governed data — are HazelHeartwood's. This is the practice I run from Madrid: mock-up, production, handover.",
+    metric: "Live",
+    metricLabel: "in daily operations",
     tags: ["Transformation", "Agents", "Handover", "Madrid"],
   },
   {
@@ -137,9 +139,8 @@ const projects: Project[] = [
     tag: "DECADE",
     status: "shipped",
     glyph: "▣",
-    img: "/assets/cms-asset-manager.png",
-    url: "https://www.gardenjoygame.com/",
-    urlLabel: "Visit Garden Joy",
+    url: "https://www.flourish.game/",
+    urlLabel: "Visit Flourish",
     org: "Burlingame Studios",
     period: "2021—2025",
     title: "A decade of shipping",
@@ -261,13 +262,13 @@ const roles: Role[] = [
     org: "HazelHeartwood",
     url: "https://www.hazelheartwood.com/",
     title: "Lead, AI & Engineering Studio",
-    location: "Madrid, ES · EU",
+    location: "Madrid, ES",
     period: "2025 — Present",
     scope: "AI CONSULTING · STRATEGY → IMPACT",
     bullets: [
       "Guide human organizations through AI-driven change — from roadmap to measurable impact.",
       "Design and build complex multidisciplinary agent-orchestration architectures and systems.",
-      "Consult, implement, and embed AI agents and systems into production within large EU enterprises.",
+      "Consult, implement, and embed AI agents and systems into production within large enterprises.",
       "Translate business strategy into pragmatic, compliant agentic architectures.",
       "Partner with internal teams to upskill engineers and de-risk adoption at scale.",
     ],
@@ -276,7 +277,6 @@ const roles: Role[] = [
       "Agent Orchestration",
       "Agentic Systems",
       "Enterprise",
-      "EU",
     ],
   },
 ];
@@ -301,7 +301,6 @@ const education: Education[] = [
 
 const stack: StackGroup[] = [
   {
-    span: "span 2",
     cat: "AI & Agents",
     items: [
       "MCP",
@@ -322,17 +321,14 @@ const stack: StackGroup[] = [
     ],
   },
   {
-    span: "span 1",
     cat: "Frontend",
     items: ["Next.js", "React", "Generative UI", "Tailwind", "Angular"],
   },
   {
-    span: "span 1",
     cat: "Backend & Languages",
     items: ["Go", "Python", "FastAPI", "Node.js", "TypeScript", "PHP"],
   },
   {
-    span: "span 2",
     cat: "Cloud / IaC",
     items: [
       "Terraform",
@@ -346,12 +342,10 @@ const stack: StackGroup[] = [
     ],
   },
   {
-    span: "span 1",
     cat: "Data Stores",
     items: ["ClickHouse", "PostgreSQL", "Redis", "MySQL", "MongoDB", "DynamoDB"],
   },
   {
-    span: "span 1",
     cat: "Compliance & Trust",
     items: ["ISO 27001", "SOC2", "GDPR", "EU AI Act"],
   },
@@ -420,10 +414,12 @@ const sectionLabel = {
 } as const;
 
 const h2Style = {
-  fontFamily: MONO,
-  fontSize: 30,
+  fontFamily: GROTESK,
+  fontSize: "clamp(32px, 4.6vw, 64px)",
   fontWeight: 700,
-  letterSpacing: "-0.01em",
+  letterSpacing: "-0.04em",
+  lineHeight: 0.95,
+  textTransform: "uppercase",
   margin: 0,
 } as const;
 
@@ -431,11 +427,10 @@ export default function Home() {
   const [scr, setScr] = useState("BRING A PROCESS");
   const [selIdx, setSelIdx] = useState<number | null>(null);
   const [diag, setDiag] = useState(0);
-  const { width, isMobile, isTablet } = useViewport();
+  const { isMobile, isTablet } = useViewport();
 
   // Shared responsive helpers. Desktop (>1024) must stay byte-for-byte; every
   // value below collapses to the original when neither isMobile nor isTablet.
-  const isSmall = width <= 360; // very narrow phones (<=360)
   // standard vertical section rhythm (74px 40px on desktop)
   const sectionPad = isMobile
     ? "52px 20px"
@@ -448,8 +443,8 @@ export default function Home() {
     const phrases = [
       "BRING A PROCESS",
       "MOCK-UP BEFORE THE BUILD",
-      "DAILY OPERATIONS, NOT A DEMO",
-      "THE NEED PICKS THE TOOL",
+      "WHERE THE VALUE IS",
+      "CHALLENGE THE PROCESS",
       "HAND OVER THE CAPABILITY",
     ];
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -488,357 +483,151 @@ export default function Home() {
 
   const sel = selIdx ?? roles.length - 1;
   const selRole = roles[sel];
-  const projectCount = String(projects.length).padStart(2, "0");
 
   return (
     <div
+      className="sheet-page"
       style={{
         background: "#EFEBE2",
         minHeight: "100dvh",
         fontFamily: GROTESK,
         color: "#17150F",
         position: "relative",
-        overflowX: "hidden",
+        overflowX: "clip",
       }}
     >
-      {/* dot matrix backdrop */}
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundImage: "radial-gradient(#CDC6B6 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-          opacity: 0.5,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
+      <SheetFrame />
 
       {/* NAV */}
       <SiteNav onHome />
 
       {/* HERO */}
-      <header
-        id="top"
-        style={{
-          position: "relative",
-          zIndex: 2,
-          maxWidth: 1180,
-          margin: "0 auto",
-          padding: isMobile
-            ? "44px 20px 52px"
-            : isTablet
-              ? "56px 28px 64px"
-              : "70px 40px 80px",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: isMobile || isTablet ? "1fr" : "1.08fr 0.92fr",
-            gap: isMobile ? 28 : 40,
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: 12,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "#FF5A1F",
-                marginBottom: 18,
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <span style={{ width: 22, height: 1, background: "#FF5A1F" }} />
-              Lead, AI & Engineering Studio · HazelHeartwood · Madrid
-            </div>
-            <div
-              style={{
-                fontFamily: MONO,
-                fontWeight: 700,
-                fontSize: "clamp(28px,3.6vw,40px)",
-                letterSpacing: "-0.02em",
-                lineHeight: 1,
-                marginBottom: 18,
-                color: "#17150F",
-              }}
-            >
-              Alex Madrazo
-            </div>
-            <h1
-              style={{
-                fontFamily: MONO,
-                fontWeight: 700,
-                fontSize: "clamp(30px,4.4vw,52px)",
-                lineHeight: 1.05,
-                letterSpacing: "-0.02em",
-                margin: "0 0 26px",
-                color: "#5C574C",
-              }}
-            >
-              AI that runs in the work,
+      <header id="top" className="felt-hero">
+        <div className="hero-kicker">
+          <i />
+          Fullstack AI Engineer · 8+ yrs
+        </div>
+        <div className="felt-stage">
+          <div className="felt-copy">
+            <h1 className="hero-title">
+              Value
               <br />
-              not a <span style={{ color: "#B83A0A" }}>demo</span>.
+              driven
+              <br />
+              agentic
+              <br />
+              systems.
+              <br />
+              Built to
+              <br />
+              <span className="hero-em">scale.</span>
             </h1>
-            <p
-              style={{
-                fontFamily: GROTESK,
-                fontSize: 18,
-                lineHeight: 1.6,
-                color: "#3A362E",
-                maxWidth: 560,
-                margin: "0 0 22px",
-              }}
-            >
-              I lead the AI & Engineering Studio at HazelHeartwood. We put
-              agentic systems into the daily operations of European companies:
-              a mock-up before the build, production once the value is proven,
-              and a handover so the team keeps the capability. Behind that is
-              8+ years as a fullstack engineer and technical lead.
+            <p className="felt-lead">
+              Governable as they grow. I learn the need, find where the value
+              is, and challenge the process.
             </p>
+            <div className="felt-actions">
+              <a href="#contact" className="pill-ink">
+                Bring a process <span>↗</span>
+              </a>
+              <a href="#work" className="pill-line">
+                See the work
+              </a>
+            </div>
+          </div>
+          <FeltOrb />
+          <div className="felt-aside">
+            <p>
+              A mock-up before the build. Production once the value is proven.
+              A handover so the team keeps the capability.
+            </p>
+            <div className="felt-pills">
+              <a href="#method">Process</a>
+              <a href="#method">Build</a>
+              <a href="#method">Handover</a>
+            </div>
             <div
               style={{
                 fontFamily: MONO,
                 fontSize: 13,
                 color: "#5C574C",
-                marginBottom: 34,
+                marginTop: 18,
               }}
             >
               <span style={{ color: "#B83A0A" }}>$</span> am --engage{" "}
-              <span style={{ color: "#5C574C" }}>&gt;&gt;</span>{" "}
+              <span>&gt;&gt;</span>{" "}
               <span style={{ color: "#17150F", fontWeight: 600 }}>{scr}</span>
               {cursor}
             </div>
-            <div
-              style={{
-                display: "flex",
-                gap: 14,
-                flexWrap: "wrap",
-                alignItems: "center",
-              }}
-            >
-              <a
-                href="#contact"
-                className="btn-dark"
-                style={{
-                  background: "#FF5A1F",
-                  color: "#17150F",
-                  fontFamily: MONO,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  padding: "13px 14px 13px 16px",
-                  borderRadius: 8,
-                  display: "inline-flex",
-                  gap: 8,
-                  alignItems: "center",
-                }}
-              >
-                Bring a process <span>→</span>
-              </a>
-              <a
-                href="https://www.hazelheartwood.com/impact/index.html"
-                className="btn-outline"
-                style={{
-                  border: "1px solid #C7C0B0",
-                  color: "#17150F",
-                  fontFamily: MONO,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  padding: "13px 16px",
-                  borderRadius: 8,
-                }}
-              >
-                See the studio&apos;s work
-              </a>
+            <div className="felt-status">
               <span
                 style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  fontFamily: MONO,
-                  fontSize: 12,
-                  color: "#5C574C",
-                  marginLeft: 6,
+                  width: 7,
+                  height: 7,
+                  borderRadius: "50%",
+                  background: "#1B9C5A",
+                  display: "inline-block",
+                  animation: "pulseDot 1.6s ease-in-out infinite",
                 }}
-              >
-                <span
-                  style={{
-                    width: 7,
-                    height: 7,
-                    borderRadius: "50%",
-                    background: "#1B9C5A",
-                    display: "inline-block",
-                    animation: "pulseDot 1.6s ease-in-out infinite",
-                  }}
-                />
-                Available · Madrid, ES
-              </span>
+              />
+              Available · Madrid
             </div>
-          </div>
-
-          {/* 3D signature mark */}
-          <div
-            style={{
-              position: "relative",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: isMobile ? 300 : 380,
-              transformOrigin: "center",
-            }}
-          >
-            <span
-              style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: 16,
-                height: 16,
-                borderTop: "1.5px solid #17150F",
-                borderLeft: "1.5px solid #17150F",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                top: 0,
-                right: 0,
-                width: 16,
-                height: 16,
-                borderTop: "1.5px solid #17150F",
-                borderRight: "1.5px solid #17150F",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                bottom: 0,
-                left: 0,
-                width: 16,
-                height: 16,
-                borderBottom: "1.5px solid #17150F",
-                borderLeft: "1.5px solid #17150F",
-              }}
-            />
-            <span
-              style={{
-                position: "absolute",
-                bottom: 0,
-                right: 0,
-                width: 16,
-                height: 16,
-                borderBottom: "1.5px solid #17150F",
-                borderRight: "1.5px solid #17150F",
-              }}
-            />
-            <div
-              style={{
-                position: "absolute",
-                width: 300,
-                height: 300,
-                border: "1px solid #DDD6C8",
-                borderRadius: "50%",
-              }}
-            />
-            <GlitchMark size={isMobile ? 240 : 300} />
-            {!isSmall && (
-              <>
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 14,
-                    right: 8,
-                    fontFamily: MONO,
-                    fontSize: 12,
-                    lineHeight: 1.9,
-                    color: "#5C574C",
-                    textAlign: "left",
-                  }}
-                >
-                  <div style={{ color: "#5C574C" }}>▌STATE</div>
-                  <div>EMBEDDED</div>
-                  <div style={{ color: "#5C574C", marginTop: 8 }}>▌SIGNAL</div>
-                  <div style={{ color: "#B83A0A" }}>BOOKING</div>
-                </div>
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 14,
-                    left: 8,
-                    fontFamily: MONO,
-                    fontSize: 12,
-                    lineHeight: 1.9,
-                    color: "#5C574C",
-                  }}
-                >
-                  <div style={{ color: "#5C574C" }}>▌NODE</div>
-                  <div>AM // MADRID</div>
-                </div>
-              </>
-            )}
           </div>
         </div>
       </header>
 
-      <section
-        aria-label="Proof"
-        style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
-      >
-        <div
-          style={{
-            maxWidth: 1180,
-            margin: "0 auto",
-            padding: isMobile ? "20px" : "24px 40px",
-            display: "grid",
-            gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
-            gap: 16,
-          }}
-        >
-          {[
-            ["Studio", "AI & Engineering, HazelHeartwood, Madrid"],
-            ["8+ yrs", "From squad lead to production AI"],
-            ["Range", "Low-code validation to full-stack agents"],
-            ["Trust", "EU AI Act, GDPR, and NIS2 in the build"],
-          ].map(([k, v]) => (
-            <div key={k}>
-              <div
-                style={{
-                  fontFamily: MONO,
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "#17150F",
-                }}
-              >
-                {k}
-              </div>
-              <div
-                style={{
-                  fontFamily: GROTESK,
-                  fontSize: 16,
-                  lineHeight: 1.5,
-                  color: "#3A362E",
-                  marginTop: 4,
-                }}
-              >
-                {v}
-              </div>
+      <section className="title-block" aria-label="Proof">
+        {[
+          ["Studio", "AI & Engineering, Madrid"],
+          ["8+ yrs", "From squad lead to production AI"],
+          ["Range", "Low-code validation to full-stack agents"],
+          ["Trust", "EU AI Act, GDPR, and NIS2 in the build"],
+        ].map(([k, v]) => (
+          <div key={k}>
+            <div
+              style={{
+                fontFamily: MONO,
+                fontSize: 12,
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                color: "#B83A0A",
+              }}
+            >
+              {k}
             </div>
-          ))}
-        </div>
+            <div
+              style={{
+                fontFamily: GROTESK,
+                fontSize: 16,
+                lineHeight: 1.45,
+                color: "#17150F",
+                marginTop: 6,
+              }}
+            >
+              {v}
+            </div>
+          </div>
+        ))}
       </section>
+
+      <PlanSequence />
 
       <section
         id="situation"
+        className="sheet-pause"
+      >
+        <h2>
+          Bring the situation,
+          <br />
+          not the tool.
+        </h2>
+      </section>
+
+      <section
         style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
       >
         <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
           <div style={sectionLabel}>// WHERE YOU ARE</div>
-          <h2 style={h2Style}>Bring the situation, not the tool.</h2>
           <div
             role="tablist"
             aria-label="Where AI sits in the company"
@@ -968,7 +757,7 @@ export default function Home() {
                 style={{
                   background: "#FCFBF6",
                   border: "1px solid #D7D0C2",
-                  borderRadius: 14,
+                  borderRadius: 2,
                   padding: "28px 24px",
                   display: "flex",
                   flexDirection: "column",
@@ -1052,278 +841,55 @@ export default function Home() {
         }}
       >
         <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              flexWrap: "wrap",
-              gap: 12,
-              marginBottom: 24,
-            }}
-          >
-            <div>
-              <div style={sectionLabel}>// 02 — PROOF</div>
-              <h2 style={h2Style}>What the work looks like</h2>
-            </div>
-            <div
-              style={{
-                fontFamily: MONO,
-                fontSize: 11,
-                color: "#908A7C",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-              }}
-            >
-              <span style={{ color: "#FF5A1F" }}>↕</span> scroll · {projectCount}{" "}
-              projects
-            </div>
-          </div>
-
-          <div
-            className="work-scroll"
-            style={{
-              maxHeight: isMobile ? "none" : 660,
-              overflowY: isMobile ? "visible" : "auto",
-              paddingRight: isMobile ? 0 : 10,
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-            }}
-          >
-            {projects.map((pj) => (
-              <div
-                key={pj.title}
-                className="card-hover"
-                style={{
-                  flexShrink: 0,
-                  background: "#FCFBF6",
-                  border: "1px solid #D7D0C2",
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  display: "grid",
-                  gridTemplateColumns:
-                    isMobile || isTablet ? "1fr" : "1fr 300px",
-                }}
-              >
-                <div
-                  style={{
-                    padding: isMobile ? "20px 18px" : "24px 26px",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 13,
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      fontFamily: MONO,
-                      fontSize: 11,
-                      letterSpacing: "0.05em",
-                      color: "#908A7C",
-                    }}
-                  >
-                    <span>{pj.tag}</span>
-                    <span style={{ color: "#FF5A1F" }}>{pj.status}</span>
-                  </div>
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: 11,
-                        color: "#908A7C",
-                        marginBottom: 7,
-                      }}
-                    >
-                      {pj.org} · {pj.period}
-                    </div>
-                    <h3
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: 23,
-                        fontWeight: 700,
-                        letterSpacing: "-0.01em",
-                        margin: 0,
-                        color: "#17150F",
-                      }}
-                    >
-                      {pj.title}
-                    </h3>
-                  </div>
-                  <p
-                    style={{
-                      fontFamily: GROTESK,
-                      fontSize: 15,
-                      lineHeight: 1.62,
-                      color: "#3A362E",
-                      margin: 0,
-                      flexGrow: 1,
-                    }}
-                  >
-                    {pj.blurb}
-                  </p>
-                  <div
-                    style={{
-                      fontFamily: MONO,
-                      fontSize: 13,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 10,
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#FF5A1F",
-                        fontWeight: 700,
-                        fontSize: 21,
-                      }}
-                    >
-                      {pj.metric}
-                    </span>
-                    <span style={{ color: "#908A7C" }}>{pj.metricLabel}</span>
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: 7,
-                      paddingTop: 2,
-                    }}
-                  >
-                    {pj.tags.map((pt) => (
-                      <span key={pt} style={tagChip}>
-                        {pt}
-                      </span>
-                    ))}
-                  </div>
-                  {pj.url && (
-                    <a
-                      href={pj.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="glitch-link"
-                      style={{
-                        alignSelf: "flex-start",
-                        marginTop: 4,
-                        fontFamily: MONO,
-                        fontSize: 12.5,
-                        fontWeight: 700,
-                        color: "#17150F",
-                        background: "#FF5A1F",
-                        border: "1px solid #FF5A1F",
-                        padding: "9px 14px 9px 16px",
-                        borderRadius: 8,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 8,
-                      }}
-                    >
-                      {pj.urlLabel} <span style={{ fontSize: 13 }}>↗</span>
-                    </a>
-                  )}
+          <div style={sectionLabel}>// 02 — PROOF</div>
+          <h2 style={{ ...h2Style, maxWidth: "14ch" }}>What the work looks like</h2>
+        </div>
+        <div className="work-index">
+          {projects.map((pj, i) => (
+            <article key={pj.title} className="work-plate">
+              <div className="work-no">{String(i + 1).padStart(2, "0")}</div>
+              <div>
+                <div className="work-kicker">
+                  {pj.org} · {pj.period}
                 </div>
-                <div
-                  style={{
-                    position: "relative",
-                    ...(isMobile || isTablet
-                      ? { borderTop: "1px solid #E3DDD0", height: 200 }
-                      : { borderLeft: "1px solid #E3DDD0" }),
-                    background: "#F3EFE6",
-                    backgroundImage:
-                      "radial-gradient(#D7D0C2 1px, transparent 1px)",
-                    backgroundSize: "16px 16px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    minHeight: 200,
-                    overflow: "hidden",
-                  }}
-                >
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      left: 10,
-                      width: 12,
-                      height: 12,
-                      borderTop: "1.5px solid #C7C0B0",
-                      borderLeft: "1.5px solid #C7C0B0",
-                      zIndex: 2,
-                    }}
-                  />
-                  <span
-                    style={{
-                      position: "absolute",
-                      bottom: 10,
-                      right: 10,
-                      width: 12,
-                      height: 12,
-                      borderBottom: "1.5px solid #C7C0B0",
-                      borderRight: "1.5px solid #C7C0B0",
-                      zIndex: 2,
-                    }}
-                  />
-                  {pj.img ? (
-                    <img
-                      src={pj.img}
-                      alt={`${pj.title} preview`}
-                      style={{
-                        position: "absolute",
-                        inset: 0,
-                        width: "100%",
-                        height: "100%",
-                        objectFit: pj.imgFit ?? "cover",
-                        objectPosition:
-                          pj.imgFit === "contain" ? "center" : "left top",
-                      }}
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: 10,
-                        color: "#A39C8C",
-                      }}
-                    >
-                      <span
-                        style={{
-                          width: 46,
-                          height: 46,
-                          borderRadius: 11,
-                          background: "#FCFBF6",
-                          border: "1px solid #D7D0C2",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 20,
-                          color: "#FF5A1F",
-                        }}
-                      >
-                        {pj.glyph}
-                      </span>
-                      <span
-                        style={{
-                          fontFamily: MONO,
-                          fontSize: 10,
-                          letterSpacing: "0.1em",
-                          textTransform: "uppercase",
-                        }}
-                      >
-                        preview
-                      </span>
-                    </div>
-                  )}
+                <h3>{pj.title}</h3>
+                <p>{pj.blurb}</p>
+                <div className="work-tags">
+                  {pj.tags.map((tg) => (
+                    <span key={tg} style={tagChip}>
+                      {tg}
+                    </span>
+                  ))}
                 </div>
               </div>
-            ))}
-          </div>
+              <div>
+                <div className="work-metric">{pj.metric}</div>
+                <div className="work-metric-label">{pj.metricLabel}</div>
+                {pj.url ? (
+                  <a
+                    className="work-link"
+                    href={pj.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {pj.urlLabel} <span>↗</span>
+                  </a>
+                ) : null}
+              </div>
+              {pj.img ? (
+                <div className="work-shot">
+                  <img
+                    src={pj.img}
+                    alt={`${pj.title} at ${pj.org}`}
+                    style={{ objectFit: pj.imgFit ?? "contain" }}
+                  />
+                </div>
+              ) : null}
+            </article>
+          ))}
         </div>
       </section>
+
 
       {/* TIMELINE */}
       <section
@@ -1787,77 +1353,24 @@ export default function Home() {
             </p>
           </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "repeat(2,1fr)",
-              gap: 16,
-            }}
-          >
+          <div className="stack-folds">
             {stack.map((sk) => (
-              <div
-                key={sk.cat}
-                style={{
-                  gridColumn: isMobile ? "auto" : sk.span,
-                  background: "#FCFBF6",
-                  border: "1px solid #D7D0C2",
-                  borderRadius: 14,
-                  padding: 24,
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: 13,
-                    fontWeight: 700,
-                    letterSpacing: "-0.01em",
-                    color: "#17150F",
-                    marginBottom: 14,
-                  }}
-                >
-                  {sk.cat}
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              <details key={sk.cat} className="stack-fold">
+                <summary>
+                  <span>{sk.cat}</span>
+                  <span className="stack-count">
+                    {String(sk.items.length).padStart(2, "0")}
+                  </span>
+                </summary>
+                <div className="stack-items">
                   {sk.items.map((it) => (
-                    <span
-                      key={it}
-                      className="chip-hover"
-                      style={{
-                        fontFamily: MONO,
-                        fontSize: 11.5,
-                        color: "#3A362E",
-                        background: "#FFFFFF",
-                        border: "1px solid #DDD6C8",
-                        padding: "5px 10px 5px 6px",
-                        borderRadius: 7,
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 7,
-                      }}
-                    >
-                      <span
-                        style={{
-                          width: 16,
-                          height: 16,
-                          borderRadius: 4,
-                          background: "#F0ECE2",
-                          border: "1px solid #DDD6C8",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontSize: 8,
-                          fontWeight: 700,
-                          color: "#A39C8C",
-                          flexShrink: 0,
-                        }}
-                      >
-                        {initial(it)}
-                      </span>
+                    <span key={it} className="chip-hover stack-chip">
+                      <span className="stack-initial">{initial(it)}</span>
                       {it}
                     </span>
                   ))}
                 </div>
-              </div>
+              </details>
             ))}
           </div>
         </div>
@@ -1991,16 +1504,7 @@ export default function Home() {
           <div style={{ ...sectionLabel, marginBottom: 18 }}>
             // 06 — ENGAGE
           </div>
-          <h2
-            style={{
-              fontFamily: MONO,
-              fontSize: "clamp(30px,4.5vw,52px)",
-              fontWeight: 700,
-              letterSpacing: "-0.02em",
-              margin: "0 0 16px",
-              lineHeight: 1.08,
-            }}
-          >
+          <h2 style={{ ...h2Style, margin: "0 0 16px" }}>
             Bring me the process.
           </h2>
           <p
@@ -2243,7 +1747,7 @@ export default function Home() {
             alignItems: "center",
             fontFamily: MONO,
             fontSize: 11,
-            color: "#908A7C",
+            color: "#5C574C",
             letterSpacing: "0.05em",
             flexWrap: "wrap",
             gap: 10,

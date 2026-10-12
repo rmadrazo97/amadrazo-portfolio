@@ -72,6 +72,7 @@ export default function SiteNav({
         alignItems: "center",
         gap: 11,
         fontWeight: 700,
+        letterSpacing: "0.18em",
         textTransform: "uppercase",
         color: "#17150F",
       }}
@@ -87,7 +88,7 @@ export default function SiteNav({
         }}
       />
       Alex Madrazo
-      <span style={{ color: "#A39C8C", fontWeight: 500 }}> /</span>
+      <span style={{ color: "#5C574C", fontWeight: 500 }}> /</span>
     </NavLink>
   );
 
@@ -95,21 +96,18 @@ export default function SiteNav({
     <nav
       style={{
         position: "sticky",
-        top: 0,
+        top: 12,
         zIndex: 20,
-        backdropFilter: "blur(8px)",
-        background: "rgba(239,235,226,0.82)",
+        background: "#EFEBE2",
         borderBottom: "1px solid #D7D0C2",
       }}
     >
       <div
         style={{
-          maxWidth: 1180,
-          margin: "0 auto",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          padding: isMobile ? "13px 20px" : "14px 40px",
+          padding: isMobile ? "8px 8px" : "12px 8px",
           fontFamily: MONO,
           fontSize: 12,
           letterSpacing: "0.04em",
@@ -186,17 +184,18 @@ export default function SiteNav({
             </div>
             <NavLink
               href={ctaHref}
-              className="nav-cta"
+              className="nav-link"
               style={{
-                background: "#FF5A1F",
                 color: "#17150F",
-                padding: "9px 14px 9px 16px",
-                borderRadius: 8,
                 fontWeight: 600,
                 textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
               }}
             >
-              Bring a process →
+              Bring a process <span style={{ color: "#FF5A1F" }}>↗</span>
             </NavLink>
           </>
         )}
