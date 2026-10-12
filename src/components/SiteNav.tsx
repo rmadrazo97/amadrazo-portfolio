@@ -9,11 +9,10 @@ const MONO = "'JetBrains Mono', monospace";
 type NavItem = { label: string; hash?: string; href?: string };
 
 const ITEMS: NavItem[] = [
-  { label: "Capabilities", hash: "services" },
-  { label: "Work", hash: "work" },
-  { label: "Trajectory", hash: "timeline" },
-  { label: "Stack", hash: "stack" },
-  { label: "Writing", href: "/blog" },
+  { label: "Method", hash: "method" },
+  { label: "Proof", hash: "work" },
+  { label: "Notes", href: "/blog" },
+  { label: "Engage", hash: "contact" },
 ];
 
 /**
@@ -128,8 +127,8 @@ export default function SiteNav({
               flexDirection: "column",
               justifyContent: "center",
               gap: 4,
-              width: 40,
-              height: 40,
+              width: 44,
+              height: 44,
               padding: 0,
               background: "none",
               border: "none",
@@ -145,7 +144,9 @@ export default function SiteNav({
                   height: 2,
                   background: "#17150F",
                   borderRadius: 2,
-                  transition: "transform 0.2s ease, opacity 0.2s ease",
+                  transitionProperty: "transform, opacity",
+                  transitionDuration: "200ms",
+                  transitionTimingFunction: "ease-out",
                   transform: open
                     ? i === 0
                       ? "translateY(6px) rotate(45deg)"
@@ -175,7 +176,7 @@ export default function SiteNav({
                   className="nav-link"
                   style={
                     active === "writing" && item.href === "/blog"
-                      ? { color: "#FF5A1F" }
+                      ? { color: "#B83A0A" }
                       : undefined
                   }
                 >
@@ -187,70 +188,74 @@ export default function SiteNav({
               href={ctaHref}
               className="nav-cta"
               style={{
-                background: "#17150F",
-                color: "#EFEBE2",
-                padding: "9px 16px",
-                borderRadius: 7,
+                background: "#FF5A1F",
+                color: "#17150F",
+                padding: "9px 14px 9px 16px",
+                borderRadius: 8,
                 fontWeight: 600,
                 textTransform: "uppercase",
               }}
             >
-              Get in touch →
+              Bring a process →
             </NavLink>
           </>
         )}
       </div>
 
-      {/* mobile dropdown panel */}
-      {isMobile && open && (
-        <div
-          style={{
-            borderTop: "1px solid #D7D0C2",
-            background: "rgba(239,235,226,0.97)",
-            padding: "10px 20px 18px",
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            fontFamily: MONO,
-            fontSize: 14,
-            textTransform: "uppercase",
-            letterSpacing: "0.04em",
-          }}
-        >
-          {ITEMS.map((item) => (
-            <NavLink
-              key={item.label}
-              href={hrefFor(item)}
-              className="nav-link"
-              onClick={() => setOpen(false)}
-              style={{
-                color:
-                  active === "writing" && item.href === "/blog"
-                    ? "#FF5A1F"
-                    : "#5C574C",
-                padding: "12px 4px",
-                borderBottom: "1px solid #E3DDD0",
-              }}
-            >
-              {item.label}
-            </NavLink>
-          ))}
-          <NavLink
-            href={ctaHref}
-            onClick={() => setOpen(false)}
+      {isMobile && (
+        <div className={open ? "nav-panel open" : "nav-panel"}>
+          <div
+            className="nav-panel-inner"
             style={{
-              marginTop: 12,
-              background: "#17150F",
-              color: "#EFEBE2",
-              padding: "13px 16px",
-              borderRadius: 8,
-              fontWeight: 600,
+              borderTop: "1px solid #D7D0C2",
+              background: "rgba(239,235,226,0.97)",
+              padding: open ? "10px 20px 18px" : "0 20px",
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              fontFamily: MONO,
+              fontSize: 14,
               textTransform: "uppercase",
-              textAlign: "center",
+              letterSpacing: "0.04em",
             }}
           >
-            Get in touch →
-          </NavLink>
+            {ITEMS.map((item) => (
+              <NavLink
+                key={item.label}
+                href={hrefFor(item)}
+                className="nav-link"
+                onClick={() => setOpen(false)}
+                style={{
+                  color:
+                    active === "writing" && item.href === "/blog"
+                      ? "#B83A0A"
+                      : "#5C574C",
+                  padding: "12px 4px",
+                  minHeight: 44,
+                  borderBottom: "1px solid #E3DDD0",
+                }}
+              >
+                {item.label}
+              </NavLink>
+            ))}
+            <NavLink
+              href={ctaHref}
+              className="nav-cta"
+              onClick={() => setOpen(false)}
+              style={{
+                marginTop: 12,
+                background: "#FF5A1F",
+                color: "#17150F",
+                padding: "13px 16px",
+                borderRadius: 8,
+                fontWeight: 600,
+                textTransform: "uppercase",
+                textAlign: "center",
+              }}
+            >
+              Bring a process →
+            </NavLink>
+          </div>
         </div>
       )}
     </nav>

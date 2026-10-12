@@ -93,13 +93,12 @@ a {
   }
 }
 
-/* ---- glitch link ---- */
+/* ---- links: color only, interruptible, no glitch on controls ---- */
 .glitch-link {
   position: relative;
 }
 .glitch-link:hover {
-  animation: linkGlitch 0.42s steps(2, end) 1;
-  border-color: #ff5a1f !important;
+  border-color: #b83a0a !important;
 }
 
 /* ---- work column scrollbar ---- */
@@ -121,48 +120,112 @@ a {
   scrollbar-color: #c7c0b0 transparent;
 }
 
-/* ---- hover states (style-hover from the design) ---- */
+/* ---- hover, press, focus ---- */
+:focus-visible {
+  outline: 2px solid #17150f;
+  outline-offset: 2px;
+}
+.panel :focus-visible {
+  outline-color: #ff5a1f;
+}
+
 .nav-link {
-  transition: color 0.18s ease;
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .nav-link:hover {
-  color: #ff5a1f !important;
+  color: #b83a0a !important;
 }
-.nav-cta {
-  transition: background 0.18s ease;
-}
-.nav-cta:hover {
-  background: #ff5a1f !important;
-}
+.nav-cta,
 .btn-dark {
-  transition: background 0.18s ease;
+  transition-property: scale, background-color, color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
+.nav-cta:hover,
 .btn-dark:hover {
   background: #17150f !important;
+  color: #efebe2 !important;
+}
+.nav-cta:active,
+.btn-dark:active,
+.btn-press:active {
+  scale: 0.96;
 }
 .btn-outline {
-  transition: border-color 0.18s ease;
+  transition-property: border-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .btn-outline:hover {
   border-color: #17150f !important;
 }
+.btn-outline:active {
+  scale: 0.96;
+}
 .card-hover {
-  transition: border-color 0.2s ease;
+  transition-property: border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .card-hover:hover {
-  border-color: #ff5a1f !important;
+  border-color: #b83a0a !important;
 }
 .chip-hover {
-  transition: border-color 0.18s ease;
+  transition-property: border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .chip-hover:hover {
-  border-color: #ff5a1f !important;
+  border-color: #b83a0a !important;
 }
 .channel {
-  transition: border-color 0.18s ease, background 0.18s ease;
+  transition-property: border-color, background-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
 }
 .channel:hover {
   background: #2a2016 !important;
+}
+.channel:active {
+  scale: 0.96;
+}
+
+img {
+  outline: 1px solid oklch(0 0 0 / 0.1);
+  outline-offset: -1px;
+}
+
+.nav-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(4px);
+  transition-property: grid-template-rows, opacity, transform;
+  transition-duration: 200ms;
+  transition-timing-function: ease-out;
+  pointer-events: none;
+}
+.nav-panel.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.nav-panel-inner {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---------------------------------------------------------------------------

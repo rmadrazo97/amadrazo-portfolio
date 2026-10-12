@@ -8,14 +8,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Alex Madrazo — Senior AI Engineer",
+  title: "Alex Madrazo — AI into the work",
   description:
-    "Senior AI Engineer, Fullstack & Technical Lead. I architect the foundational infrastructure for AI-native applications — LLM routing, agent observability, and the cloud platforms beneath them.",
+    "Lead of the AI & Engineering Studio at HazelHeartwood. Agentic systems in daily operations, from the mock-up to production, then a handover the team can run.",
   metadataBase: new URL("https://amadrazo.dev"),
   openGraph: {
-    title: "Alex Madrazo — Senior AI Engineer",
+    title: "Alex Madrazo — AI into the work",
     description:
-      "Shipping agentic systems in production. LLM routing, agent observability, and cloud infrastructure.",
+      "AI that runs in the work, not a demo. Madrid. AI & Engineering Studio, HazelHeartwood.",
     type: "website",
   },
 };

@@ -9,7 +9,7 @@ const GROTESK = "'Space Grotesk', sans-serif";
 export const metadata: Metadata = {
   title: "Writing — Alex Madrazo",
   description:
-    "Field notes on AI engineering — platforms, agent systems, observability, and shipping production software that compounds.",
+    "Field notes on putting AI into how a company works — from the process, to production, to a handover the team can run.",
 };
 
 export default function BlogIndex() {
@@ -32,7 +32,7 @@ export default function BlogIndex() {
             fontSize: 12,
             letterSpacing: "0.16em",
             textTransform: "uppercase",
-            color: "#FF5A1F",
+            color: "#B83A0A",
             marginBottom: 16,
             display: "flex",
             alignItems: "center",
@@ -95,7 +95,7 @@ export default function BlogIndex() {
                 }}
               >
                 <span>{formatDate(p.date)}</span>
-                <span style={{ color: "#FF5A1F" }}>{p.readingTime}</span>
+                <span style={{ color: "#B83A0A" }}>{p.readingTime}</span>
               </div>
               <h2
                 className="blog-card-title"
@@ -152,7 +152,7 @@ export default function BlogIndex() {
                   fontFamily: MONO,
                   fontSize: 12.5,
                   fontWeight: 700,
-                  color: "#FF5A1F",
+                  color: "#B83A0A",
                 }}
               >
                 Read →

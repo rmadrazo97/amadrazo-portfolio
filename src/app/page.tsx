@@ -58,165 +58,96 @@ type Channel = { label: string; value: string; icon: string; url: string };
 const services: Service[] = [
   {
     no: "01",
-    glyph: "{ }",
-    title: "AI-Native Infrastructure & Tooling",
-    desc: "The substrate beneath AI products: MCP servers, RAG pipelines and vector search, plus the developer tooling on top — agent-first CLIs, sandboxed environments, and secure code execution.",
-    tags: ["MCP", "RAG", "Vector Search", "CLIs", "Sandboxes"],
+    glyph: "⌖",
+    title: "The process",
+    desc: "Bring one process where the number has not moved, or one pilot that is stuck. You leave with a problem statement and a decision to scale or stop. If the value is unclear, the build waits.",
+    tags: ["Value first", "As-is", "One process"],
   },
   {
     no: "02",
     glyph: "◇",
-    title: "Agentic Systems & Copilots",
-    desc: "Multi-agent orchestration across the spectrum — autonomous long-horizon workers, customer-facing copilots, and internal assistants. Tool-use, human-in-the-loop guardrails, and context engineering wired through MCP.",
-    tags: ["Multi-Agent", "Copilots", "Autonomous", "MCP"],
+    title: "The build",
+    desc: "A mock-up before a line of code. Then the data and the agent, from low-code validation to full-stack production engineering. Routing, traces, and a KPI agreed before the sprint.",
+    tags: ["Mock-up", "Agents", "Traces", "KPI"],
   },
   {
     no: "03",
-    glyph: "≋",
-    title: "Observability & Telemetry",
-    desc: "Hierarchical traces that capture every LLM call, tool invocation, and retrieval step — filterable by user, session, cost, and latency. LLM-as-a-judge evaluation, prompt management, and golden datasets on a high-throughput telemetry engine.",
-    tags: ["Langfuse", "ClickHouse", "LLM-as-Judge", "Evals", "Tracing"],
+    glyph: "▷",
+    title: "The handover",
+    desc: "The people who do the work use it in daily operations. You keep the capability. I do not run the tool after go-live. Human oversight stays in the loop.",
+    tags: ["Adoption", "Handover", "EU AI Act"],
+  },
+];
+
+const situations = [
+  {
+    label: "A tool idea",
+    leave: "The process",
+    body: "There is an idea for a tool, and no process behind it. We start where the work happens and leave with a problem statement and the value at stake.",
   },
   {
-    no: "04",
-    glyph: "△",
-    title: "Cloud & DevOps",
-    desc: "Infrastructure-as-Code across AWS, GCP, and Azure, with Kubernetes at scale. DevOps pipelines with AI at their core — automated PR reviews and self-healing, self-building systems on GitHub Actions and GitLab CI.",
-    tags: ["AWS/GCP/Azure", "Terraform", "Kubernetes", "GitHub/GitLab CI"],
+    label: "A stuck pilot",
+    leave: "A decision",
+    body: "A pilot has not moved a number. We walk the accuracy check and say whether it should be scaled or stopped.",
   },
   {
-    no: "05",
-    glyph: "⌗",
-    title: "High-Performance Backends & Intuitive Frontends",
-    desc: "End-to-end product engineering, backed by 8+ years full-stack: Go and Python services over real-time data layers, paired with intuitive React / Next.js frontends — including generative UI — built for throughput and heavy user loads.",
-    tags: ["Go", "Python", "Next.js", "React", "OLAP"],
+    label: "An agent in a demo",
+    leave: "The build",
+    body: "The agent still lives in a demo. A mock-up comes first, then production engineering: routing, traces, and a KPI agreed before the sprint.",
   },
   {
-    no: "06",
-    glyph: "✦",
-    title: "Leadership & Communication",
-    desc: "Building effective multidisciplinary teams and leading them from business strategy to delivery. Fluent translating between technical and business contexts, with a genuine focus on mentoring, teaching, and growing engineers. Owns enterprise trust end-to-end: ISO 27001, SOC2, GDPR and EU AI Act.",
-    tags: ["Team Building", "Mentoring", "Tech ↔ Business", "Compliance"],
+    label: "A system the team runs",
+    leave: "The handover",
+    body: "The system is in daily operations, with a KPI and traces. The team keeps the capability. We do not run the tool after go-live.",
   },
 ];
 
 const projects: Project[] = [
   {
-    tag: "FLAGSHIP",
+    tag: "STUDIO",
+    status: "● live",
+    glyph: "✦",
+    url: "https://www.hazelheartwood.com/impact/index.html",
+    urlLabel: "Studio impact stories",
+    org: "HazelHeartwood",
+    period: "2025—present",
+    title: "AI & Engineering Studio",
+    blurb:
+      "I lead the studio that puts agentic systems into the daily operations of European companies. The firm's public stories — planners, supplier search, governed data — are HazelHeartwood's. This is the practice I run from Madrid: mock-up, production, handover.",
+    metric: "EU",
+    metricLabel: "daily operations, not demos",
+    tags: ["Transformation", "Agents", "Handover", "Madrid"],
+  },
+  {
+    tag: "ENGINEERING",
     status: "● live",
     glyph: "≋",
     url: "https://www.interactive.ai/",
     urlLabel: "Visit interactive.ai",
-    img: "https://langfuse.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fobservability-ui.0bpdi69_vw-s7.png&w=3840&q=100",
     org: "Interactive AI",
     period: "2025—present",
-    title: "Agent Engineering Platform",
+    title: "Agent engineering platform",
     blurb:
-      "An end-to-end enterprise platform to build, connect, deploy, govern and improve AI agents. I engineered the observability and orchestration core — a high-throughput telemetry engine (FastAPI + ClickHouse) tracing every run from prompt to outcome, an MCP-based orchestration layer with a smart LLM Router across 200+ models, and an agent-first CLI + SDK, wrapped in a Generative-UI agent builder.",
+      "The production system behind the studio's engineering: observability and orchestration from zero to enterprise in under six months. A telemetry engine tracing every run, an MCP orchestration layer, and an LLM router across 200+ models.",
     metric: "<6mo",
-    metricLabel: "zero → enterprise production",
-    tags: [
-      "Go",
-      "Python · FastAPI",
-      "ClickHouse",
-      "MCP",
-      "LLM Router",
-      "Generative UI",
-      "Kubernetes",
-    ],
+    metricLabel: "zero to production platform",
+    tags: ["FastAPI", "ClickHouse", "MCP", "LLM Router", "Kubernetes"],
   },
   {
-    tag: "PRODUCT",
-    status: "● live",
-    glyph: "◧",
-    img: "/assets/promptvm-ask.png",
-    url: "https://promptvm.ai/",
-    urlLabel: "Visit promptvm.ai",
-    org: "PromptVM",
-    period: "2025—present",
-    title: "PromptVM",
-    blurb:
-      "Version control, a marketplace, and developer tools for AI prompts — write once, deploy anywhere via MCP, CLI, SDK or REST API. Semantic search runs across thousands of prompt versions so teams can track how a prompt evolved and promote the best-performing one as their default.",
-    metric: "∞",
-    metricLabel: "prompt versions, searchable",
-    tags: [
-      "Next.js",
-      "Prompt Versioning",
-      "Semantic Search",
-      "CLI",
-      "MCP",
-      "API",
-    ],
-  },
-  {
-    tag: "MOBILE · AI",
-    status: "● live",
-    glyph: "☀",
-    url: "https://apps.apple.com/us/app/myweather-ai/id6779910676",
-    urlLabel: "App Store",
-    img: "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/be/46/79/be467983-adee-e28c-10c0-1173b7dc8807/01-hero.png/300x650bb.webp",
-    imgFit: "contain",
-    org: "Independent",
-    period: "2025",
-    title: "MyWeather AI",
-    blurb:
-      'A beautifully minimal iOS weather app with a built-in conversational AI assistant. Instead of decoding charts, just ask — "Do I need an umbrella today?" — and it reads the live forecast (Open-Meteo) for any city, checks air quality, UV and more, and replies in plain, friendly language. The UI adapts to the weather and time of day.',
-    metric: "iOS",
-    metricLabel: "on the App Store",
-    tags: ["SwiftUI", "Conversational AI", "Open-Meteo", "Air Quality"],
-  },
-  {
-    tag: "PLATFORM",
+    tag: "DECADE",
     status: "shipped",
-    glyph: "◆",
+    glyph: "▣",
     img: "/assets/cms-asset-manager.png",
+    url: "https://www.gardenjoygame.com/",
+    urlLabel: "Visit Garden Joy",
     org: "Burlingame Studios",
     period: "2021—2025",
-    title: "Mobile Game CMS + 3D Content Production Pipelines",
+    title: "A decade of shipping",
     blurb:
-      "Content pipelines for AAA mobile titles built for fast-paced LiveOps: headless Unity render clusters producing 3D game assets at scale, AI-driven localization across four languages, and content-generation copilot agents that accelerated production — serving millions of players.",
-    metric: "M+",
-    metricLabel: "users served",
-    tags: [
-      "TypeScript",
-      "Unity",
-      "GCP",
-      "LiveOps",
-      "AI Localization",
-      "Copilot Agents",
-    ],
-  },
-  {
-    tag: "WEB3",
-    status: "shipped",
-    glyph: "⬡",
-    url: "https://x.com/BiotaNexus",
-    urlLabel: "Biota on X",
-    img: "/assets/biota-certificate.jpg",
-    org: "Meteo.tech",
-    period: "2019—2021",
-    title: "Biota.land",
-    blurb:
-      "A Web3 NFT marketplace for carbon credits on Celo — each token a certificate of authenticity tied to a real preserved area (e.g. Tirimbina Biological Reserve), enabling transparent, traceable carbon-offset transactions on-chain.",
-    metric: "NFT",
-    metricLabel: "carbon-credit marketplace",
-    tags: ["Web3", "Celo", "Solidity", "Next.js"],
-  },
-  {
-    tag: "GEOSPATIAL",
-    status: "shipped",
-    glyph: "◉",
-    url: "https://cvtas.centroclima.org/#/login",
-    urlLabel: "Visit platform",
-    img: "/assets/climate-map.png",
-    org: "Meteo.tech / D.A.P",
-    period: "2019—2021",
-    title: "Climate Intelligence Platforms",
-    blurb:
-      "Advanced meteorological and climatological platforms with interactive real-time maps, plus climate-risk assessment tools supporting strategic planning and resilience across the region.",
-    metric: "RT",
-    metricLabel: "real-time interactive maps",
-    tags: ["React", "Node.js", "PostgreSQL", "Mapping"],
+      "Before the studio: fullstack and technical lead, including a CMS and live-ops tooling for an AAA mobile game serving millions of players, and a squad of five taken from business strategy to delivered software.",
+    metric: "8+ yrs",
+    metricLabel: "strategy to shipped software",
+    tags: ["Technical Lead", "CMS", "Live Ops", "Squad of 5"],
   },
 ];
 
@@ -328,8 +259,8 @@ const roles: Role[] = [
   {
     year: "2025—now",
     org: "HazelHeartwood",
-    url: "https://hazelheartwood.com/",
-    title: "Lead AI Engineering Consultant",
+    url: "https://www.hazelheartwood.com/",
+    title: "Lead, AI & Engineering Studio",
     location: "Madrid, ES · EU",
     period: "2025 — Present",
     scope: "AI CONSULTING · STRATEGY → IMPACT",
@@ -426,21 +357,6 @@ const stack: StackGroup[] = [
   },
 ];
 
-const marquee = [
-  "GO",
-  "PYTHON",
-  "TYPESCRIPT",
-  "KUBERNETES",
-  "TERRAFORM",
-  "CLICKHOUSE",
-  "FASTAPI",
-  "MCP",
-  "POSTGRES",
-  "NEXT.JS",
-  "GCP",
-  "REDIS",
-];
-
 const channels: Channel[] = [
   {
     label: "Email",
@@ -487,19 +403,19 @@ const cursor = (
 
 const tagChip = {
   fontFamily: MONO,
-  fontSize: 11,
+  fontSize: 12,
   color: "#5C574C",
   background: "#EFEBE2",
   border: "1px solid #D7D0C2",
   padding: "4px 9px",
-  borderRadius: 6,
+  borderRadius: 8,
 } as const;
 
 const sectionLabel = {
   fontFamily: MONO,
-  fontSize: 11,
+  fontSize: 12,
   letterSpacing: "0.14em",
-  color: "#FF5A1F",
+  color: "#B83A0A",
   marginBottom: 10,
 } as const;
 
@@ -512,8 +428,9 @@ const h2Style = {
 } as const;
 
 export default function Home() {
-  const [scr, setScr] = useState("");
+  const [scr, setScr] = useState("BRING A PROCESS");
   const [selIdx, setSelIdx] = useState<number | null>(null);
+  const [diag, setDiag] = useState(0);
   const { width, isMobile, isTablet } = useViewport();
 
   // Shared responsive helpers. Desktop (>1024) must stay byte-for-byte; every
@@ -529,16 +446,20 @@ export default function Home() {
   // hero scramble / reveal ticker
   useEffect(() => {
     const phrases = [
-      "LLM ROUTING & OBSERVABILITY",
-      "AGENT ORCHESTRATION (MCP)",
-      "GENERATIVE UI COPILOTS",
-      "CLOUD INFRASTRUCTURE (IaC)",
-      "HIGH-PERFORMANCE BACKENDS",
+      "BRING A PROCESS",
+      "MOCK-UP BEFORE THE BUILD",
+      "DAILY OPERATIONS, NOT A DEMO",
+      "THE NEED PICKS THE TOOL",
+      "HAND OVER THE CAPABILITY",
     ];
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setScr(phrases[0]);
+      return;
+    }
     const CH = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789/#<>*";
     let pIdx = 0;
     let reveal = 0;
-    let hold = 0;
+    let hold = 40;
     const id = setInterval(() => {
       const tg = phrases[pIdx];
       let s = "";
@@ -567,15 +488,13 @@ export default function Home() {
 
   const sel = selIdx ?? roles.length - 1;
   const selRole = roles[sel];
-  const progressW =
-    roles.length <= 1 ? "0%" : `${(sel / (roles.length - 1)) * 100}%`;
   const projectCount = String(projects.length).padStart(2, "0");
 
   return (
     <div
       style={{
         background: "#EFEBE2",
-        minHeight: "100vh",
+        minHeight: "100dvh",
         fontFamily: GROTESK,
         color: "#17150F",
         position: "relative",
@@ -636,7 +555,7 @@ export default function Home() {
               }}
             >
               <span style={{ width: 22, height: 1, background: "#FF5A1F" }} />
-              Senior AI Engineer · Fullstack · Technical Lead
+              Lead, AI & Engineering Studio · HazelHeartwood · Madrid
             </div>
             <div
               style={{
@@ -662,9 +581,9 @@ export default function Home() {
                 color: "#5C574C",
               }}
             >
-              Shipping Agentic Systems
+              AI that runs in the work,
               <br />
-              in <span style={{ color: "#FF5A1F" }}>production</span>
+              not a <span style={{ color: "#B83A0A" }}>demo</span>.
             </h1>
             <p
               style={{
@@ -672,14 +591,15 @@ export default function Home() {
                 fontSize: 18,
                 lineHeight: 1.6,
                 color: "#3A362E",
-                maxWidth: 520,
+                maxWidth: 560,
                 margin: "0 0 22px",
               }}
             >
-              I architect the foundational infrastructure for AI-native
-              applications — LLM routing, agent observability, and the cloud
-              platforms beneath them — backed by 8+ years leading teams from
-              business strategy to delivered software.
+              I lead the AI & Engineering Studio at HazelHeartwood. We put
+              agentic systems into the daily operations of European companies:
+              a mock-up before the build, production once the value is proven,
+              and a handover so the team keeps the capability. Behind that is
+              8+ years as a fullstack engineer and technical lead.
             </p>
             <div
               style={{
@@ -689,8 +609,8 @@ export default function Home() {
                 marginBottom: 34,
               }}
             >
-              <span style={{ color: "#FF5A1F" }}>$</span> am --skill{" "}
-              <span style={{ color: "#908A7C" }}>&gt;&gt;</span>{" "}
+              <span style={{ color: "#B83A0A" }}>$</span> am --engage{" "}
+              <span style={{ color: "#5C574C" }}>&gt;&gt;</span>{" "}
               <span style={{ color: "#17150F", fontWeight: 600 }}>{scr}</span>
               {cursor}
             </div>
@@ -703,25 +623,25 @@ export default function Home() {
               }}
             >
               <a
-                href="#work"
+                href="#contact"
                 className="btn-dark"
                 style={{
                   background: "#FF5A1F",
-                  color: "#fff",
+                  color: "#17150F",
                   fontFamily: MONO,
                   fontSize: 13,
                   fontWeight: 600,
-                  padding: "13px 22px",
+                  padding: "13px 14px 13px 16px",
                   borderRadius: 8,
                   display: "inline-flex",
                   gap: 8,
                   alignItems: "center",
                 }}
               >
-                View selected work <span>→</span>
+                Bring a process <span>→</span>
               </a>
               <a
-                href="#contact"
+                href="https://www.hazelheartwood.com/impact/index.html"
                 className="btn-outline"
                 style={{
                   border: "1px solid #C7C0B0",
@@ -729,11 +649,11 @@ export default function Home() {
                   fontFamily: MONO,
                   fontSize: 13,
                   fontWeight: 600,
-                  padding: "13px 22px",
+                  padding: "13px 16px",
                   borderRadius: 8,
                 }}
               >
-                Get in touch
+                See the studio&apos;s work
               </a>
               <span
                 style={{
@@ -769,11 +689,6 @@ export default function Home() {
               alignItems: "center",
               justifyContent: "center",
               minHeight: isMobile ? 300 : 380,
-              transform: isMobile
-                ? isSmall
-                  ? "scale(0.8)"
-                  : "scale(0.9)"
-                : undefined,
               transformOrigin: "center",
             }}
           >
@@ -839,16 +754,16 @@ export default function Home() {
                     top: 14,
                     right: 8,
                     fontFamily: MONO,
-                    fontSize: 10,
+                    fontSize: 12,
                     lineHeight: 1.9,
                     color: "#5C574C",
                     textAlign: "left",
                   }}
                 >
-                  <div style={{ color: "#A39C8C" }}>▌STATE</div>
-                  <div>EVOLVING</div>
-                  <div style={{ color: "#A39C8C", marginTop: 8 }}>▌SIGNAL</div>
-                  <div style={{ color: "#FF5A1F" }}>UNSTABLE</div>
+                  <div style={{ color: "#5C574C" }}>▌STATE</div>
+                  <div>EMBEDDED</div>
+                  <div style={{ color: "#5C574C", marginTop: 8 }}>▌SIGNAL</div>
+                  <div style={{ color: "#B83A0A" }}>BOOKING</div>
                 </div>
                 <div
                   style={{
@@ -856,12 +771,12 @@ export default function Home() {
                     bottom: 14,
                     left: 8,
                     fontFamily: MONO,
-                    fontSize: 10,
+                    fontSize: 12,
                     lineHeight: 1.9,
                     color: "#5C574C",
                   }}
                 >
-                  <div style={{ color: "#A39C8C" }}>▌NODE</div>
+                  <div style={{ color: "#5C574C" }}>▌NODE</div>
                   <div>AM // MADRID</div>
                 </div>
               </>
@@ -870,9 +785,134 @@ export default function Home() {
         </div>
       </header>
 
-      {/* CAPABILITIES */}
       <section
-        id="services"
+        aria-label="Proof"
+        style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
+      >
+        <div
+          style={{
+            maxWidth: 1180,
+            margin: "0 auto",
+            padding: isMobile ? "20px" : "24px 40px",
+            display: "grid",
+            gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+            gap: 16,
+          }}
+        >
+          {[
+            ["Studio", "AI & Engineering, HazelHeartwood, Madrid"],
+            ["8+ yrs", "From squad lead to production AI"],
+            ["Range", "Low-code validation to full-stack agents"],
+            ["Trust", "EU AI Act, GDPR, and NIS2 in the build"],
+          ].map(([k, v]) => (
+            <div key={k}>
+              <div
+                style={{
+                  fontFamily: MONO,
+                  fontSize: 13,
+                  fontWeight: 700,
+                  color: "#17150F",
+                }}
+              >
+                {k}
+              </div>
+              <div
+                style={{
+                  fontFamily: GROTESK,
+                  fontSize: 16,
+                  lineHeight: 1.5,
+                  color: "#3A362E",
+                  marginTop: 4,
+                }}
+              >
+                {v}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section
+        id="situation"
+        style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
+      >
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
+          <div style={sectionLabel}>// WHERE YOU ARE</div>
+          <h2 style={h2Style}>Bring the situation, not the tool.</h2>
+          <div
+            role="tablist"
+            aria-label="Where AI sits in the company"
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "repeat(4, 1fr)",
+              gap: 8,
+              marginTop: 28,
+            }}
+          >
+            {situations.map((st, i) => {
+              const on = diag === i;
+              return (
+                <button
+                  key={st.label}
+                  type="button"
+                  role="tab"
+                  aria-selected={on}
+                  onClick={() => setDiag(i)}
+                  className="btn-press"
+                  style={{
+                    textAlign: "left",
+                    minHeight: 44,
+                    padding: "12px 14px",
+                    borderRadius: 8,
+                    border: on ? "1px solid #B83A0A" : "1px solid #D7D0C2",
+                    background: on ? "#FCFBF6" : "transparent",
+                    color: "#17150F",
+                    fontFamily: MONO,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    cursor: "pointer",
+                    transitionProperty: "border-color, background-color, scale",
+                    transitionDuration: "150ms",
+                    transitionTimingFunction: "ease-out",
+                  }}
+                >
+                  0{i + 1} {st.label}
+                </button>
+              );
+            })}
+          </div>
+          <div
+            role="tabpanel"
+            style={{
+              marginTop: 16,
+              background: "#FCFBF6",
+              border: "1px solid #D7D0C2",
+              borderRadius: 16,
+              padding: isMobile ? 18 : 24,
+            }}
+          >
+            <div style={{ ...sectionLabel, marginBottom: 8 }}>
+              YOU LEAVE WITH {situations[diag].leave.toUpperCase()}
+            </div>
+            <p
+              style={{
+                fontFamily: GROTESK,
+                fontSize: 16,
+                lineHeight: 1.6,
+                color: "#3A362E",
+                margin: 0,
+                maxWidth: "65ch",
+              }}
+            >
+              {situations[diag].body}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* METHOD */}
+      <section
+        id="method"
         style={{
           position: "relative",
           zIndex: 2,
@@ -892,8 +932,8 @@ export default function Home() {
             }}
           >
             <div>
-              <div style={sectionLabel}>// 01 — CAPABILITIES</div>
-              <h2 style={h2Style}>What I build</h2>
+              <div style={sectionLabel}>// 01 — METHOD</div>
+              <h2 style={h2Style}>How an engagement runs</h2>
             </div>
             <p
               style={{
@@ -905,8 +945,8 @@ export default function Home() {
                 lineHeight: 1.6,
               }}
             >
-              Not a list of tools — the systems I own end-to-end, from
-              infrastructure to the interface on top.
+              Three steps. The need picks the tool, from low-code to
+              full-stack. Business first, technology second.
             </p>
           </div>
 
@@ -973,7 +1013,7 @@ export default function Home() {
                 <p
                   style={{
                     fontFamily: GROTESK,
-                    fontSize: 14.5,
+                    fontSize: 16,
                     lineHeight: 1.6,
                     color: "#3A362E",
                     margin: 0,
@@ -1023,8 +1063,8 @@ export default function Home() {
             }}
           >
             <div>
-              <div style={sectionLabel}>// 02 — SELECTED WORK</div>
-              <h2 style={h2Style}>Projects I&apos;ve shipped</h2>
+              <div style={sectionLabel}>// 02 — PROOF</div>
+              <h2 style={h2Style}>What the work looks like</h2>
             </div>
             <div
               style={{
@@ -1171,10 +1211,10 @@ export default function Home() {
                         fontFamily: MONO,
                         fontSize: 12.5,
                         fontWeight: 700,
-                        color: "#fff",
+                        color: "#17150F",
                         background: "#FF5A1F",
                         border: "1px solid #FF5A1F",
-                        padding: "9px 16px",
+                        padding: "9px 14px 9px 16px",
                         borderRadius: 8,
                         display: "inline-flex",
                         alignItems: "center",
@@ -1309,12 +1349,7 @@ export default function Home() {
                 lineHeight: 1.6,
               }}
             >
-              Select a node to inspect the role.{" "}
-              <span
-                style={{ fontFamily: MONO, fontSize: 12, color: "#908A7C" }}
-              >
-                [ click to expand ]
-              </span>
+              A decade of shipping, then the studio. Select a year to read the role.
             </p>
           </div>
 
@@ -1339,9 +1374,13 @@ export default function Home() {
                     top: 11,
                     left: 0,
                     height: 2,
+                    right: 0,
                     background: "#FF5A1F",
-                    width: progressW,
-                    transition: "width 0.35s ease",
+                    transform: `scaleX(${roles.length <= 1 ? 0 : sel / (roles.length - 1)})`,
+                    transformOrigin: "left center",
+                    transitionProperty: "transform",
+                    transitionDuration: "200ms",
+                    transitionTimingFunction: "ease-out",
                   }}
                 />
               </>
@@ -1548,7 +1587,7 @@ export default function Home() {
                   <span
                     style={{
                       fontFamily: GROTESK,
-                      fontSize: 14.5,
+                      fontSize: 16,
                       lineHeight: 1.55,
                       color: "#D9D3C6",
                     }}
@@ -1730,20 +1769,21 @@ export default function Home() {
           }}
         >
           <div style={{ marginBottom: 38 }}>
-            <div style={sectionLabel}>// 04 — STACK</div>
-            <h2 style={h2Style}>Works across the stack</h2>
+            <div style={sectionLabel}>// 04 — THE BUILD</div>
+            <h2 style={h2Style}>What the engagement stands on</h2>
             <p
               style={{
                 fontFamily: GROTESK,
-                fontSize: 15,
-                color: "#5C574C",
+                fontSize: 16,
+                color: "#3A362E",
                 margin: "12px 0 0",
-                maxWidth: 460,
+                maxWidth: "65ch",
                 lineHeight: 1.6,
               }}
             >
-              From the intelligence layer down to the platform it runs on — no
-              framework lock-in.
+              Low-code where the data already lives. Full-stack where the
+              company needs to own the system. Traces and a human in the loop
+              either way.
             </p>
           </div>
 
@@ -1823,63 +1863,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* METRICS marquee */}
-      <section style={{ position: "relative", zIndex: 2 }}>
-        <div
-          style={{
-            background: "#1A1813",
-            borderTop: "1px solid #2E2A22",
-            borderBottom: "1px solid #2E2A22",
-            padding: "16px 0",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              width: "max-content",
-              animation: "marquee 22s linear infinite",
-            }}
-          >
-            <div style={{ display: "flex", gap: 34, paddingRight: 34 }}>
-              {marquee.map((mq, mi) => (
-                <span
-                  key={mi}
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: "#C9C3B4",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {mq} <span style={{ color: "#FF5A1F" }}>/</span>
-                </span>
-              ))}
-            </div>
-            <div
-              style={{ display: "flex", gap: 34, paddingRight: 34 }}
-              aria-hidden="true"
-            >
-              {marquee.map((mq, mi) => (
-                <span
-                  key={mi}
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: 14,
-                    fontWeight: 600,
-                    color: "#C9C3B4",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {mq} <span style={{ color: "#FF5A1F" }}>/</span>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* WRITING */}
       <section
         id="writing"
@@ -1901,8 +1884,8 @@ export default function Home() {
             }}
           >
             <div>
-              <div style={sectionLabel}>// 05 — WRITING</div>
-              <h2 style={h2Style}>Notes from the build</h2>
+              <div style={sectionLabel}>// 05 — NOTES</div>
+              <h2 style={h2Style}>The method, in writing</h2>
             </div>
             <a
               href="/blog"
@@ -1984,6 +1967,64 @@ export default function Home() {
         </div>
       </section>
 
+      <section
+        aria-label="Objections"
+        style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
+      >
+        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
+          <div style={sectionLabel}>// BEFORE YOU WRITE</div>
+          <h2 style={{ ...h2Style, marginBottom: 24 }}>The questions that come up</h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+              gap: 16,
+            }}
+          >
+            {[
+              ["Do you ship, or hand over a deck?", "The studio ships. A mock-up first, then the agent in daily operations, with traces and a KPI agreed before the sprint."],
+              ["Does this replace our team?", "No. The people who do the work stay accountable, and they keep the capability after go-live."],
+              ["Low-code or a custom build?", "The need picks the tool. Low-code where the data already lives. Full-stack where you need to own the system."],
+              ["What about the EU AI Act?", "Oversight, traces, and data handling are part of the build, not a review that happens afterwards."],
+            ].map(([q, a]) => (
+              <div
+                key={q}
+                style={{
+                  background: "#FCFBF6",
+                  border: "1px solid #D7D0C2",
+                  borderRadius: 16,
+                  padding: 24,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: MONO,
+                    fontSize: 16,
+                    fontWeight: 700,
+                    color: "#17150F",
+                    lineHeight: 1.3,
+                    marginBottom: 8,
+                  }}
+                >
+                  {q}
+                </div>
+                <p
+                  style={{
+                    fontFamily: GROTESK,
+                    fontSize: 16,
+                    lineHeight: 1.6,
+                    color: "#3A362E",
+                    margin: 0,
+                  }}
+                >
+                  {a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
       <section
         id="contact"
@@ -2006,7 +2047,7 @@ export default function Home() {
           }}
         >
           <div style={{ ...sectionLabel, marginBottom: 18 }}>
-            // 06 — CONTACT
+            // 06 — ENGAGE
           </div>
           <h2
             style={{
@@ -2014,23 +2055,37 @@ export default function Home() {
               fontSize: "clamp(30px,4.5vw,52px)",
               fontWeight: 700,
               letterSpacing: "-0.02em",
-              margin: "0 0 32px",
+              margin: "0 0 16px",
               lineHeight: 1.08,
             }}
           >
-            Let&apos;s build something
-            <br />
-            that ships.
+            Bring me the process.
           </h2>
+          <p
+            style={{
+              fontFamily: GROTESK,
+              fontSize: 16,
+              lineHeight: 1.6,
+              color: "#3A362E",
+              maxWidth: "65ch",
+              margin: "0 0 32px",
+            }}
+          >
+            One hour. Bring one process where the number has not moved, or one
+            pilot that is stuck. You leave with a problem statement and a
+            decision to scale or stop.
+          </p>
 
           {/* terminal */}
           <div
+            className="panel"
             style={{
               background: "#1A1813",
               border: "1px solid #2E2A22",
               borderRadius: 12,
               overflow: "hidden",
-              boxShadow: "0 28px 70px -34px rgba(20,18,12,0.55)",
+              boxShadow:
+                "0px 0px 0px 1px oklch(0 0 0 / 0.06), 0px 1px 2px -1px oklch(0 0 0 / 0.06), 0px 2px 4px 0px oklch(0 0 0 / 0.04)",
             }}
           >
             <div
@@ -2109,9 +2164,9 @@ export default function Home() {
                 fontFamily: MONO,
               }}
             >
-              <div style={{ fontSize: 13, color: "#7A7565", marginBottom: 8 }}>
-                <span style={{ color: "#FF5A1F" }}>$</span> am --connect{" "}
-                <span style={{ color: "#908A7C" }}>--all</span>
+              <div style={{ fontSize: 13, color: "#C9C3B4", marginBottom: 8 }}>
+                <span style={{ color: "#FF5A1F" }}>$</span> am --engage{" "}
+                <span style={{ color: "#C9C3B4" }}>--process</span>
               </div>
               <div
                 style={{
@@ -2121,7 +2176,7 @@ export default function Home() {
                   lineHeight: 1.7,
                 }}
               >
-                → opening 4 channels · pick one to reach me directly
+                → one process, or one stuck pilot. The first conversation is an hour.
                 {cursor}
               </div>
 

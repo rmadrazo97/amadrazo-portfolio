@@ -21,7 +21,7 @@ export default function SiteShell({
     <div
       style={{
         background: "#EFEBE2",
-        minHeight: "100vh",
+        minHeight: "100dvh",
         fontFamily: GROTESK,
         color: "#17150F",
         position: "relative",
@@ -62,15 +62,15 @@ export default function SiteShell({
             alignItems: "center",
             fontFamily: MONO,
             fontSize: 11,
-            color: "#908A7C",
+            color: "#5C574C",
             letterSpacing: "0.05em",
             flexWrap: "wrap",
           }}
         >
           <span>© 2026 JOSÉ A. MADRAZO AVILA</span>
           <span>MADRID, ES · CET</span>
-          <Link href="/" style={{ color: "#FF5A1F" }}>
-            AM // SYSTEMS, SHIPPED.
+          <Link href="/" style={{ color: "#B83A0A" }}>
+            AI INTO THE WORK.
           </Link>
         </div>
       </footer>
