@@ -1967,64 +1967,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section
-        aria-label="Objections"
-        style={{ position: "relative", zIndex: 2, borderTop: "1px solid #D7D0C2" }}
-      >
-        <div style={{ maxWidth: 1180, margin: "0 auto", padding: sectionPad }}>
-          <div style={sectionLabel}>// BEFORE YOU WRITE</div>
-          <h2 style={{ ...h2Style, marginBottom: 24 }}>The questions that come up</h2>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
-              gap: 16,
-            }}
-          >
-            {[
-              ["Do you ship, or hand over a deck?", "The studio ships. A mock-up first, then the agent in daily operations, with traces and a KPI agreed before the sprint."],
-              ["Does this replace our team?", "No. The people who do the work stay accountable, and they keep the capability after go-live."],
-              ["Low-code or a custom build?", "The need picks the tool. Low-code where the data already lives. Full-stack where you need to own the system."],
-              ["What about the EU AI Act?", "Oversight, traces, and data handling are part of the build, not a review that happens afterwards."],
-            ].map(([q, a]) => (
-              <div
-                key={q}
-                style={{
-                  background: "#FCFBF6",
-                  border: "1px solid #D7D0C2",
-                  borderRadius: 16,
-                  padding: 24,
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: MONO,
-                    fontSize: 16,
-                    fontWeight: 700,
-                    color: "#17150F",
-                    lineHeight: 1.3,
-                    marginBottom: 8,
-                  }}
-                >
-                  {q}
-                </div>
-                <p
-                  style={{
-                    fontFamily: GROTESK,
-                    fontSize: 16,
-                    lineHeight: 1.6,
-                    color: "#3A362E",
-                    margin: 0,
-                  }}
-                >
-                  {a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CONTACT */}
       <section
         id="contact"
