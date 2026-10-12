@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import SheetFrame from "./SheetFrame";
 import SiteNav from "./SiteNav";
 
 const MONO = "'JetBrains Mono', monospace";
@@ -19,28 +20,19 @@ export default function SiteShell({
 }) {
   return (
     <div
+      className="sheet-page"
       style={{
         background: "#EFEBE2",
         minHeight: "100dvh",
         fontFamily: GROTESK,
         color: "#17150F",
         position: "relative",
-        overflowX: "hidden",
+        overflowX: "clip",
         display: "flex",
         flexDirection: "column",
       }}
     >
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          backgroundImage: "radial-gradient(#CDC6B6 1px, transparent 1px)",
-          backgroundSize: "22px 22px",
-          opacity: 0.5,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
+      <SheetFrame />
 
       <SiteNav active={active} />
 

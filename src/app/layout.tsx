@@ -8,14 +8,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Alex Madrazo — AI into the work",
+  title: "Alex Madrazo — Value-driven agentic systems",
   description:
-    "Lead of the AI & Engineering Studio at HazelHeartwood. Agentic systems in daily operations, from the mock-up to production, then a handover the team can run.",
+    "Governable, scalable agentic systems. I learn the need, find where the value is, and challenge the process. Madrid.",
   metadataBase: new URL("https://amadrazo.dev"),
   openGraph: {
-    title: "Alex Madrazo — AI into the work",
+    title: "Alex Madrazo — Value-driven agentic systems",
     description:
-      "AI that runs in the work, not a demo. Madrid. AI & Engineering Studio, HazelHeartwood.",
+      "Value-driven. Governable. Built to scale. Madrid.",
     type: "website",
   },
 };
