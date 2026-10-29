@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -40,6 +41,10 @@ export default function RootLayout({
         />
       </head>
       <body>{children}</body>
+      {/* Set NEXT_PUBLIC_GA_ID (see .env.production) to enable visitor analytics. */}
+      {process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }
